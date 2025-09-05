@@ -1,0 +1,274 @@
+﻿[
+    {
+        "description":  "ðŸ›¡ï¸ Health \u0026 Life Insurance",
+        "from":  18,
+        "to":  0,
+        "change_pp":  -18,
+        "trend":  "cheaper",
+        "source":  "GST.html"
+    },
+    {
+        "description":  "ðŸšœ Tractor Tyres \u0026 Parts",
+        "from":  18,
+        "to":  5,
+        "change_pp":  -13,
+        "trend":  "cheaper",
+        "source":  "GST.html"
+    },
+    {
+        "description":  "ðŸ‘“ Corrective Spectacles",
+        "from":  12,
+        "to":  5,
+        "change_pp":  -7,
+        "trend":  "cheaper",
+        "source":  "GST.html"
+    },
+    {
+        "description":  "ðŸ¿ Namkeens \u0026 Mixtures",
+        "from":  12,
+        "to":  5,
+        "change_pp":  -7,
+        "trend":  "cheaper",
+        "source":  "GST.html"
+    },
+    {
+        "description":  "ðŸ§´ Hair Oil, Shampoo, Soap",
+        "from":  18,
+        "to":  5,
+        "change_pp":  -13,
+        "trend":  "cheaper",
+        "source":  "GST.html"
+    },
+    {
+        "description":  "ðŸ§ˆ Butter, Ghee, Cheese",
+        "from":  12,
+        "to":  5,
+        "change_pp":  -7,
+        "trend":  "cheaper",
+        "source":  "GST.html"
+    },
+    {
+        "description":  "ðŸ¿ Namkeens \u0026 Mixtures",
+        "from":  12,
+        "to":  5,
+        "change_pp":  -7,
+        "trend":  "cheaper",
+        "source":  "GST.html"
+    },
+    {
+        "description":  "ðŸ² Utensils",
+        "from":  12,
+        "to":  5,
+        "change_pp":  -7,
+        "trend":  "cheaper",
+        "source":  "GST.html"
+    },
+    {
+        "description":  "ðŸ¼ Feeding Bottles, Diapers",
+        "from":  12,
+        "to":  5,
+        "change_pp":  -7,
+        "trend":  "cheaper",
+        "source":  "GST.html"
+    },
+    {
+        "description":  "ðŸ§µ Sewing Machines",
+        "from":  12,
+        "to":  5,
+        "change_pp":  -7,
+        "trend":  "cheaper",
+        "source":  "GST.html"
+    },
+    {
+        "description":  "ðŸ›¡ï¸ Health \u0026 Life Insurance",
+        "from":  18,
+        "to":  0,
+        "change_pp":  -18,
+        "trend":  "cheaper",
+        "source":  "GST.html"
+    },
+    {
+        "description":  "ðŸŒ¡ï¸ Thermometer",
+        "from":  12,
+        "to":  5,
+        "change_pp":  -7,
+        "trend":  "cheaper",
+        "source":  "GST.html"
+    },
+    {
+        "description":  "ðŸ’¨ Medical Oxygen",
+        "from":  12,
+        "to":  5,
+        "change_pp":  -7,
+        "trend":  "cheaper",
+        "source":  "GST.html"
+    },
+    {
+        "description":  "ðŸ§ª Diagnostic Kits",
+        "from":  12,
+        "to":  5,
+        "change_pp":  -7,
+        "trend":  "cheaper",
+        "source":  "GST.html"
+    },
+    {
+        "description":  "ðŸ“Š Glucometer \u0026 Test Strips",
+        "from":  12,
+        "to":  5,
+        "change_pp":  -7,
+        "trend":  "cheaper",
+        "source":  "GST.html"
+    },
+    {
+        "description":  "ðŸ‘“ Corrective Spectacles",
+        "from":  12,
+        "to":  5,
+        "change_pp":  -7,
+        "trend":  "cheaper",
+        "source":  "GST.html"
+    },
+    {
+        "description":  "ðŸšœ Tractor Tyres \u0026 Parts",
+        "from":  18,
+        "to":  5,
+        "change_pp":  -13,
+        "trend":  "cheaper",
+        "source":  "GST.html"
+    },
+    {
+        "description":  "ðŸšœ Tractors",
+        "from":  12,
+        "to":  5,
+        "change_pp":  -7,
+        "trend":  "cheaper",
+        "source":  "GST.html"
+    },
+    {
+        "description":  "ðŸŒ± Bio-Pesticides, Micro-Nutrients",
+        "from":  12,
+        "to":  5,
+        "change_pp":  -7,
+        "trend":  "cheaper",
+        "source":  "GST.html"
+    },
+    {
+        "description":  "ðŸ’§ Drip Irrigation \u0026 Sprinklers",
+        "from":  12,
+        "to":  5,
+        "change_pp":  -7,
+        "trend":  "cheaper",
+        "source":  "GST.html"
+    },
+    {
+        "description":  "ðŸŒ¾ Harvesting Machines",
+        "from":  12,
+        "to":  5,
+        "change_pp":  -7,
+        "trend":  "cheaper",
+        "source":  "GST.html"
+    },
+    {
+        "description":  "ðŸ—ºï¸ Maps, Charts, Globes",
+        "from":  12,
+        "to":  0,
+        "change_pp":  -12,
+        "trend":  "cheaper",
+        "source":  "GST.html"
+    },
+    {
+        "description":  "âœï¸ Pencils, Crayons, Sharpeners",
+        "from":  12,
+        "to":  0,
+        "change_pp":  -12,
+        "trend":  "cheaper",
+        "source":  "GST.html"
+    },
+    {
+        "description":  "ðŸ““ Notebooks \u0026 Exercise Books",
+        "from":  12,
+        "to":  0,
+        "change_pp":  -12,
+        "trend":  "cheaper",
+        "source":  "GST.html"
+    },
+    {
+        "description":  "ðŸ©¶ Erasers",
+        "from":  5,
+        "to":  0,
+        "change_pp":  -5,
+        "trend":  "cheaper",
+        "source":  "GST.html"
+    },
+    {
+        "description":  "ðŸš— Petrol/LPG/CNG Cars (â‰¤1200cc)",
+        "from":  28,
+        "to":  18,
+        "change_pp":  -10,
+        "trend":  "cheaper",
+        "source":  "GST.html"
+    },
+    {
+        "description":  "ðŸš™ Diesel Hybrid Cars (â‰¤1500cc)",
+        "from":  28,
+        "to":  18,
+        "change_pp":  -10,
+        "trend":  "cheaper",
+        "source":  "GST.html"
+    },
+    {
+        "description":  "ðŸ›º 3-Wheelers",
+        "from":  28,
+        "to":  18,
+        "change_pp":  -10,
+        "trend":  "cheaper",
+        "source":  "GST.html"
+    },
+    {
+        "description":  "ðŸï¸ Motorcycles (â‰¤350cc)",
+        "from":  28,
+        "to":  18,
+        "change_pp":  -10,
+        "trend":  "cheaper",
+        "source":  "GST.html"
+    },
+    {
+        "description":  "ðŸšš Goods Transport Vehicles",
+        "from":  28,
+        "to":  18,
+        "change_pp":  -10,
+        "trend":  "cheaper",
+        "source":  "GST.html"
+    },
+    {
+        "description":  "â„ï¸ Air Conditioners",
+        "from":  28,
+        "to":  18,
+        "change_pp":  -10,
+        "trend":  "cheaper",
+        "source":  "GST.html"
+    },
+    {
+        "description":  "ðŸ“º TVs above 32\"",
+        "from":  28,
+        "to":  18,
+        "change_pp":  -10,
+        "trend":  "cheaper",
+        "source":  "GST.html"
+    },
+    {
+        "description":  "ðŸ–¥ï¸ Monitors \u0026 Projectors",
+        "from":  28,
+        "to":  18,
+        "change_pp":  -10,
+        "trend":  "cheaper",
+        "source":  "GST.html"
+    },
+    {
+        "description":  "ðŸ½ï¸ Dish Washing Machines",
+        "from":  28,
+        "to":  18,
+        "change_pp":  -10,
+        "trend":  "cheaper",
+        "source":  "GST.html"
+    }
+]

@@ -1,0 +1,959 @@
+﻿{
+    "summary":  {
+                    "images_total":  93,
+                    "html_total":  34,
+                    "matched":  1,
+                    "exact_matches":  1,
+                    "mismatches":  0,
+                    "missing_in_html":  92,
+                    "extra_in_html":  33
+                },
+    "mismatches":  [
+
+                   ],
+    "missing_in_html":  [
+                            {
+                                "key":  "bumpers and parts thereof for tractors",
+                                "description":  "Bumpers and parts thereof for tractors",
+                                "from":  18,
+                                "to":  5,
+                                "source":  "1.jpg"
+                            },
+                            {
+                                "key":  "thermometers",
+                                "description":  "Thermometers",
+                                "from":  18,
+                                "to":  5,
+                                "source":  "1.jpg"
+                            },
+                            {
+                                "key":  "paratha parotta and other indian breads by any name called",
+                                "description":  "Paratha, parotta and other Indian breads by any name called",
+                                "from":  18,
+                                "to":  0,
+                                "source":  "1.jpg"
+                            },
+                            {
+                                "key":  "exercise book graph book laboratory notebook and notebooks",
+                                "description":  "Exercise book, graph book, \u0026 laboratory notebook and notebooks",
+                                "from":  12,
+                                "to":  0,
+                                "source":  "2.jpg"
+                            },
+                            {
+                                "key":  "maps",
+                                "description":  "Maps",
+                                "from":  12,
+                                "to":  0,
+                                "source":  "2.jpg"
+                            },
+                            {
+                                "key":  "pencils crayons",
+                                "description":  "Pencils, crayons",
+                                "from":  12,
+                                "to":  0,
+                                "source":  "2.jpg"
+                            },
+                            {
+                                "key":  "confectionery",
+                                "description":  "Confectionery",
+                                "from":  18,
+                                "to":  5,
+                                "source":  "2.jpg"
+                            },
+                            {
+                                "key":  "cocoa powder",
+                                "description":  "Cocoa powder",
+                                "from":  18,
+                                "to":  5,
+                                "source":  "2.jpg"
+                            },
+                            {
+                                "key":  "chocolates and other food preparations",
+                                "description":  "Chocolates and other food preparations",
+                                "from":  18,
+                                "to":  5,
+                                "source":  "2.jpg"
+                            },
+                            {
+                                "key":  "pastry cakes biscuits bread",
+                                "description":  "Pastry, cakes, biscuits bread",
+                                "from":  18,
+                                "to":  5,
+                                "source":  "2.jpg"
+                            },
+                            {
+                                "key":  "coffee extracts",
+                                "description":  "Coffee extracts",
+                                "from":  18,
+                                "to":  5,
+                                "source":  "2.jpg"
+                            },
+                            {
+                                "key":  "soups and broth",
+                                "description":  "Soups and broth",
+                                "from":  18,
+                                "to":  5,
+                                "source":  "2.jpg"
+                            },
+                            {
+                                "key":  "frames and mountings for spectacles goggles or the like and parts thereof",
+                                "description":  "Frames and mountings for spectacles, goggles or the like, and parts thereof",
+                                "from":  12,
+                                "to":  5,
+                                "source":  "3.jpg"
+                            },
+                            {
+                                "key":  "spectacles corrective",
+                                "description":  "Spectacles, corrective",
+                                "from":  12,
+                                "to":  5,
+                                "source":  "3.jpg"
+                            },
+                            {
+                                "key":  "combs hair pins",
+                                "description":  "Combs, hair pins",
+                                "from":  12,
+                                "to":  5,
+                                "source":  "3.jpg"
+                            },
+                            {
+                                "key":  "bidis",
+                                "description":  "Bidis",
+                                "from":  28,
+                                "to":  18,
+                                "source":  "3.jpg"
+                            },
+                            {
+                                "key":  "acs",
+                                "description":  "ACs",
+                                "from":  28,
+                                "to":  18,
+                                "source":  "3.jpg"
+                            },
+                            {
+                                "key":  "tvs",
+                                "description":  "TVs",
+                                "from":  28,
+                                "to":  18,
+                                "source":  "3.jpg"
+                            },
+                            {
+                                "key":  "petrol cars of engine capacity not exceeding 1200cc and of length not exceeding 4000 mm",
+                                "description":  "Petrol cars of engine capacity not exceeding 1200cc and of length not exceeding 4000 mm",
+                                "from":  28,
+                                "to":  18,
+                                "source":  "3.jpg"
+                            },
+                            {
+                                "key":  "ice cream",
+                                "description":  "Ice cream",
+                                "from":  18,
+                                "to":  5,
+                                "source":  "4.jpg"
+                            },
+                            {
+                                "key":  "waters including natural or artificial mineral waters and aerated waters",
+                                "description":  "Waters, including natural or artificial mineral waters and aerated waters",
+                                "from":  18,
+                                "to":  5,
+                                "source":  "4.jpg"
+                            },
+                            {
+                                "key":  "plant based milk",
+                                "description":  "Plant-based milk",
+                                "from":  18,
+                                "to":  5,
+                                "source":  "4.jpg"
+                            },
+                            {
+                                "key":  "talcum powder face powder",
+                                "description":  "Talcum powder, Face powder",
+                                "from":  18,
+                                "to":  5,
+                                "source":  "4.jpg"
+                            },
+                            {
+                                "key":  "hair oil shampoo",
+                                "description":  "Hair oil, shampoo",
+                                "from":  18,
+                                "to":  5,
+                                "source":  "4.jpg"
+                            },
+                            {
+                                "key":  "dental floss toothpaste",
+                                "description":  "Dental floss, toothpaste",
+                                "from":  18,
+                                "to":  5,
+                                "source":  "4.jpg"
+                            },
+                            {
+                                "key":  "shaving cream shaving lotion aftershave lotion",
+                                "description":  "Shaving cream, shaving lotion, aftershave lotion",
+                                "from":  18,
+                                "to":  5,
+                                "source":  "4.jpg"
+                            },
+                            {
+                                "key":  "toilet soap",
+                                "description":  "Toilet Soap",
+                                "from":  18,
+                                "to":  5,
+                                "source":  "4.jpg"
+                            },
+                            {
+                                "key":  "tyre for tractors",
+                                "description":  "Tyre for tractors",
+                                "from":  18,
+                                "to":  5,
+                                "source":  "4.jpg"
+                            },
+                            {
+                                "key":  "bandages dressing",
+                                "description":  "Bandages, dressing",
+                                "from":  12,
+                                "to":  5,
+                                "source":  "5.jpg"
+                            },
+                            {
+                                "key":  "tooth powder",
+                                "description":  "Tooth powder",
+                                "from":  12,
+                                "to":  5,
+                                "source":  "5.jpg"
+                            },
+                            {
+                                "key":  "candles tapers and the like",
+                                "description":  "Candles, tapers and the like",
+                                "from":  12,
+                                "to":  5,
+                                "source":  "5.jpg"
+                            },
+                            {
+                                "key":  "handcrafted candles",
+                                "description":  "Handcrafted candles",
+                                "from":  12,
+                                "to":  5,
+                                "source":  "5.jpg"
+                            },
+                            {
+                                "key":  "silicon wafers",
+                                "description":  "Silicon wafers",
+                                "from":  12,
+                                "to":  5,
+                                "source":  "5.jpg"
+                            },
+                            {
+                                "key":  "all diagnostic kits",
+                                "description":  "All diagnostic kits",
+                                "from":  12,
+                                "to":  5,
+                                "source":  "5.jpg"
+                            },
+                            {
+                                "key":  "handbags",
+                                "description":  "Handbags",
+                                "from":  12,
+                                "to":  5,
+                                "source":  "5.jpg"
+                            },
+                            {
+                                "key":  "wood stone idols",
+                                "description":  "Wood, stone idols",
+                                "from":  12,
+                                "to":  5,
+                                "source":  "5.jpg"
+                            },
+                            {
+                                "key":  "handicraft",
+                                "description":  "Handicraft",
+                                "from":  12,
+                                "to":  5,
+                                "source":  "5.jpg"
+                            },
+                            {
+                                "key":  "carpets",
+                                "description":  "Carpets",
+                                "from":  12,
+                                "to":  5,
+                                "source":  "5.jpg"
+                            },
+                            {
+                                "key":  "handmade hand embroidered shawls",
+                                "description":  "Handmade/hand embroidered shawls",
+                                "from":  12,
+                                "to":  5,
+                                "source":  "5.jpg"
+                            },
+                            {
+                                "key":  "pasta",
+                                "description":  "Pasta",
+                                "from":  12,
+                                "to":  5,
+                                "source":  "6.jpg"
+                            },
+                            {
+                                "key":  "jams and fruit jellies",
+                                "description":  "Jams and fruit jellies",
+                                "from":  12,
+                                "to":  5,
+                                "source":  "6.jpg"
+                            },
+                            {
+                                "key":  "tender coconut water",
+                                "description":  "Tender coconut water",
+                                "from":  12,
+                                "to":  5,
+                                "source":  "6.jpg"
+                            },
+                            {
+                                "key":  "coffee",
+                                "description":  "Coffee",
+                                "from":  12,
+                                "to":  5,
+                                "source":  "6.jpg"
+                            },
+                            {
+                                "key":  "mustard mayonnaise",
+                                "description":  "Mustard, mayonnaise",
+                                "from":  12,
+                                "to":  5,
+                                "source":  "6.jpg"
+                            },
+                            {
+                                "key":  "namkeens",
+                                "description":  "Namkeens",
+                                "from":  12,
+                                "to":  5,
+                                "source":  "6.jpg"
+                            },
+                            {
+                                "key":  "diabetic foods",
+                                "description":  "Diabetic foods",
+                                "from":  12,
+                                "to":  5,
+                                "source":  "6.jpg"
+                            },
+                            {
+                                "key":  "drinking water",
+                                "description":  "Drinking water",
+                                "from":  12,
+                                "to":  5,
+                                "source":  "6.jpg"
+                            },
+                            {
+                                "key":  "soya milk drinks",
+                                "description":  "Soya milk drinks",
+                                "from":  12,
+                                "to":  5,
+                                "source":  "6.jpg"
+                            },
+                            {
+                                "key":  "fruit juice",
+                                "description":  "Fruit juice",
+                                "from":  12,
+                                "to":  5,
+                                "source":  "6.jpg"
+                            },
+                            {
+                                "key":  "beverages containing milk",
+                                "description":  "Beverages containing milk",
+                                "from":  12,
+                                "to":  5,
+                                "source":  "6.jpg"
+                            },
+                            {
+                                "key":  "retail medicines",
+                                "description":  "Retail medicines",
+                                "from":  12,
+                                "to":  5,
+                                "source":  "6.jpg"
+                            },
+                            {
+                                "key":  "paneer of chenna",
+                                "description":  "Paneer of chenna",
+                                "from":  5,
+                                "to":  0,
+                                "source":  "7.jpg"
+                            },
+                            {
+                                "key":  "pizza bread",
+                                "description":  "Pizza bread",
+                                "from":  5,
+                                "to":  0,
+                                "source":  "7.jpg"
+                            },
+                            {
+                                "key":  "khakhra chapathi or roti",
+                                "description":  "Khakhra, chapathi or roti",
+                                "from":  5,
+                                "to":  0,
+                                "source":  "7.jpg"
+                            },
+                            {
+                                "key":  "condensed milk",
+                                "description":  "Condensed milk",
+                                "from":  12,
+                                "to":  5,
+                                "source":  "7.jpg"
+                            },
+                            {
+                                "key":  "butter ghee oil",
+                                "description":  "Butter, ghee, oil",
+                                "from":  12,
+                                "to":  5,
+                                "source":  "7.jpg"
+                            },
+                            {
+                                "key":  "cheese",
+                                "description":  "Cheese",
+                                "from":  12,
+                                "to":  5,
+                                "source":  "7.jpg"
+                            },
+                            {
+                                "key":  "dates",
+                                "description":  "Dates",
+                                "from":  12,
+                                "to":  5,
+                                "source":  "7.jpg"
+                            },
+                            {
+                                "key":  "fish and caviar prepared and preserved",
+                                "description":  "Fish and caviar, prepared and preserved",
+                                "from":  12,
+                                "to":  5,
+                                "source":  "7.jpg"
+                            },
+                            {
+                                "key":  "shrimps and prawns prepared and preserved",
+                                "description":  "Shrimps and prawns, prepared and preserved",
+                                "from":  12,
+                                "to":  5,
+                                "source":  "7.jpg"
+                            },
+                            {
+                                "key":  "all goods incl refined sugar containing added flavouring or colouring matter sugar cubes",
+                                "description":  "All goods incl. refined sugar containing added flavouring or colouring matter, sugar cubes",
+                                "from":  12,
+                                "to":  5,
+                                "source":  "7.jpg"
+                            },
+                            {
+                                "key":  "footwear less than rs 2500 per pair",
+                                "description":  "Footwear less than Rs.2500 per pair",
+                                "from":  12,
+                                "to":  5,
+                                "source":  "8.jpg"
+                            },
+                            {
+                                "key":  "umbrellas",
+                                "description":  "Umbrellas",
+                                "from":  12,
+                                "to":  5,
+                                "source":  "8.jpg"
+                            },
+                            {
+                                "key":  "mathematical boxes geometry boxes and colour boxes",
+                                "description":  "Mathematical boxes, geometry boxes and colour boxes",
+                                "from":  12,
+                                "to":  5,
+                                "source":  "8.jpg"
+                            },
+                            {
+                                "key":  "wind mills",
+                                "description":  "Wind mills",
+                                "from":  12,
+                                "to":  5,
+                                "source":  "8.jpg"
+                            },
+                            {
+                                "key":  "pv cells",
+                                "description":  "PV cells",
+                                "from":  12,
+                                "to":  5,
+                                "source":  "8.jpg"
+                            },
+                            {
+                                "key":  "solar water heater",
+                                "description":  "Solar water heater",
+                                "from":  12,
+                                "to":  5,
+                                "source":  "8.jpg"
+                            },
+                            {
+                                "key":  "bicycles and other cycles including delivery tricycles not motorized",
+                                "description":  "Bicycles and other cycles (including delivery tricycles), not motorized",
+                                "from":  12,
+                                "to":  5,
+                                "source":  "8.jpg"
+                            },
+                            {
+                                "key":  "glucometer and test strips",
+                                "description":  "Glucometer and test strips",
+                                "from":  12,
+                                "to":  5,
+                                "source":  "8.jpg"
+                            },
+                            {
+                                "key":  "contact lenses spectacle lenses",
+                                "description":  "Contact lenses; Spectacle lenses",
+                                "from":  12,
+                                "to":  5,
+                                "source":  "8.jpg"
+                            },
+                            {
+                                "key":  "diesel cars of engine capacity not exceeding 1500 cc and of length not exceeding 4000 mm",
+                                "description":  "Diesel cars of engine capacity not exceeding 1500 cc and of length not exceeding 4000 mm",
+                                "from":  28,
+                                "to":  18,
+                                "source":  "9.jpg"
+                            },
+                            {
+                                "key":  "ambulances",
+                                "description":  "Ambulances",
+                                "from":  28,
+                                "to":  18,
+                                "source":  "9.jpg"
+                            },
+                            {
+                                "key":  "three wheeled vehicles",
+                                "description":  "Three wheeled vehicles",
+                                "from":  28,
+                                "to":  18,
+                                "source":  "9.jpg"
+                            },
+                            {
+                                "key":  "hybrids with engine capacity not exceeding 1200cc and of length not exceeding 4000 mm",
+                                "description":  "Hybrids with engine capacity not exceeding 1200cc and of length not exceeding 4000 mm",
+                                "from":  28,
+                                "to":  18,
+                                "source":  "9.jpg"
+                            },
+                            {
+                                "key":  "bodies for the motor vehicles",
+                                "description":  "Bodies for the motor vehicles",
+                                "from":  28,
+                                "to":  18,
+                                "source":  "9.jpg"
+                            },
+                            {
+                                "key":  "parts and accessories",
+                                "description":  "Parts and accessories",
+                                "from":  28,
+                                "to":  18,
+                                "source":  "9.jpg"
+                            },
+                            {
+                                "key":  "motorcycles of engine capacity not exceeding 350cc",
+                                "description":  "Motorcycles of engine capacity not exceeding 350cc",
+                                "from":  28,
+                                "to":  18,
+                                "source":  "9.jpg"
+                            },
+                            {
+                                "key":  "motor cycles of engine capacity exceeding 350 cc",
+                                "description":  "Motor cycles of engine capacity exceeding 350 cc",
+                                "from":  28,
+                                "to":  40,
+                                "source":  "Ex1.jpg"
+                            },
+                            {
+                                "key":  "yacht and other vessels for pleasure or sports",
+                                "description":  "Yacht and other vessels for pleasure or sports",
+                                "from":  28,
+                                "to":  40,
+                                "source":  "Ex1.jpg"
+                            },
+                            {
+                                "key":  "revolvers and pistols",
+                                "description":  "Revolvers and pistols",
+                                "from":  28,
+                                "to":  40,
+                                "source":  "Ex1.jpg"
+                            },
+                            {
+                                "key":  "smoking pipes",
+                                "description":  "Smoking pipes",
+                                "from":  28,
+                                "to":  40,
+                                "source":  "Ex1.jpg"
+                            },
+                            {
+                                "key":  "agarbatti",
+                                "description":  "Agarbatti",
+                                "from":  12,
+                                "to":  18,
+                                "source":  "Ex1.jpg"
+                            },
+                            {
+                                "key":  "apparel over rs 2 500",
+                                "description":  "Apparel over Rs 2,500",
+                                "from":  12,
+                                "to":  18,
+                                "source":  "Ex1.jpg"
+                            },
+                            {
+                                "key":  "non alcoholic beverages",
+                                "description":  "Non-alcoholic beverages",
+                                "from":  18,
+                                "to":  40,
+                                "source":  "Ex2.jpg"
+                            },
+                            {
+                                "key":  "pan masala",
+                                "description":  "Pan masala",
+                                "from":  28,
+                                "to":  40,
+                                "source":  "Ex2.jpg"
+                            },
+                            {
+                                "key":  "aerated beverages containing sugar",
+                                "description":  "Aerated beverages containing sugar",
+                                "from":  28,
+                                "to":  40,
+                                "source":  "Ex2.jpg"
+                            },
+                            {
+                                "key":  "carbonated beverages with fruit juice",
+                                "description":  "Carbonated beverages with fruit juice",
+                                "from":  28,
+                                "to":  40,
+                                "source":  "Ex2.jpg"
+                            },
+                            {
+                                "key":  "caffeinated beverages",
+                                "description":  "Caffeinated beverages",
+                                "from":  28,
+                                "to":  40,
+                                "source":  "Ex2.jpg"
+                            },
+                            {
+                                "key":  "cigars and cigarettes",
+                                "description":  "Cigars and cigarettes",
+                                "from":  28,
+                                "to":  40,
+                                "source":  "Ex2.jpg"
+                            },
+                            {
+                                "key":  "tobacco",
+                                "description":  "Tobacco",
+                                "from":  28,
+                                "to":  40,
+                                "source":  "Ex2.jpg"
+                            },
+                            {
+                                "key":  "motor cars other",
+                                "description":  "Motor cars other",
+                                "from":  28,
+                                "to":  40,
+                                "source":  "Ex2.jpg"
+                            },
+                            {
+                                "key":  "hybrids with engine capacity exceeding 1200cc or of length exceeding 4000 mm",
+                                "description":  "Hybrids with engine capacity exceeding 1200cc or of length exceeding 4000 mm",
+                                "from":  28,
+                                "to":  40,
+                                "source":  "Ex2.jpg"
+                            }
+                        ],
+    "extra_in_html":  [
+                          {
+                              "description":  "ðŸ›¡ï¸ Health \u0026amp; Life Insurance",
+                              "from":  18,
+                              "to":  0,
+                              "change_pp":  -18,
+                              "trend":  "cheaper",
+                              "source":  "GST.html",
+                              "key":  "health amp life insurance"
+                          },
+                          {
+                              "description":  "ðŸšœ Tractor Tyres \u0026amp; Parts",
+                              "from":  18,
+                              "to":  5,
+                              "change_pp":  -13,
+                              "trend":  "cheaper",
+                              "source":  "GST.html",
+                              "key":  "tractor tyres amp parts"
+                          },
+                          {
+                              "description":  "ðŸ‘“ Corrective Spectacles",
+                              "from":  12,
+                              "to":  5,
+                              "change_pp":  -7,
+                              "trend":  "cheaper",
+                              "source":  "GST.html",
+                              "key":  "corrective spectacles"
+                          },
+                          {
+                              "description":  "ðŸ¿ Namkeens \u0026amp; Mixtures",
+                              "from":  12,
+                              "to":  5,
+                              "change_pp":  -7,
+                              "trend":  "cheaper",
+                              "source":  "GST.html",
+                              "key":  "namkeens amp mixtures"
+                          },
+                          {
+                              "description":  "ðŸ§´ Hair Oil, Shampoo, Soap",
+                              "from":  18,
+                              "to":  5,
+                              "change_pp":  -13,
+                              "trend":  "cheaper",
+                              "source":  "GST.html",
+                              "key":  "hair oil shampoo soap"
+                          },
+                          {
+                              "description":  "ðŸ§ˆ Butter, Ghee, Cheese",
+                              "from":  12,
+                              "to":  5,
+                              "change_pp":  -7,
+                              "trend":  "cheaper",
+                              "source":  "GST.html",
+                              "key":  "butter ghee cheese"
+                          },
+                          {
+                              "description":  "ðŸ¿ Namkeens \u0026amp; Mixtures",
+                              "from":  12,
+                              "to":  5,
+                              "change_pp":  -7,
+                              "trend":  "cheaper",
+                              "source":  "GST.html",
+                              "key":  "namkeens amp mixtures"
+                          },
+                          {
+                              "description":  "ðŸ² Utensils",
+                              "from":  12,
+                              "to":  5,
+                              "change_pp":  -7,
+                              "trend":  "cheaper",
+                              "source":  "GST.html",
+                              "key":  "utensils"
+                          },
+                          {
+                              "description":  "ðŸ¼ Feeding Bottles, Diapers",
+                              "from":  12,
+                              "to":  5,
+                              "change_pp":  -7,
+                              "trend":  "cheaper",
+                              "source":  "GST.html",
+                              "key":  "feeding bottles diapers"
+                          },
+                          {
+                              "description":  "ðŸ§µ Sewing Machines",
+                              "from":  12,
+                              "to":  5,
+                              "change_pp":  -7,
+                              "trend":  "cheaper",
+                              "source":  "GST.html",
+                              "key":  "sewing machines"
+                          },
+                          {
+                              "description":  "ðŸ›¡ï¸ Health \u0026amp; Life Insurance",
+                              "from":  18,
+                              "to":  0,
+                              "change_pp":  -18,
+                              "trend":  "cheaper",
+                              "source":  "GST.html",
+                              "key":  "health amp life insurance"
+                          },
+                          {
+                              "description":  "ðŸŒ¡ï¸ Thermometer",
+                              "from":  12,
+                              "to":  5,
+                              "change_pp":  -7,
+                              "trend":  "cheaper",
+                              "source":  "GST.html",
+                              "key":  "thermometer"
+                          },
+                          {
+                              "description":  "ðŸ’¨ Medical Oxygen",
+                              "from":  12,
+                              "to":  5,
+                              "change_pp":  -7,
+                              "trend":  "cheaper",
+                              "source":  "GST.html",
+                              "key":  "medical oxygen"
+                          },
+                          {
+                              "description":  "ðŸ§ª Diagnostic Kits",
+                              "from":  12,
+                              "to":  5,
+                              "change_pp":  -7,
+                              "trend":  "cheaper",
+                              "source":  "GST.html",
+                              "key":  "diagnostic kits"
+                          },
+                          {
+                              "description":  "ðŸ“Š Glucometer \u0026amp; Test Strips",
+                              "from":  12,
+                              "to":  5,
+                              "change_pp":  -7,
+                              "trend":  "cheaper",
+                              "source":  "GST.html",
+                              "key":  "glucometer amp test strips"
+                          },
+                          {
+                              "description":  "ðŸ‘“ Corrective Spectacles",
+                              "from":  12,
+                              "to":  5,
+                              "change_pp":  -7,
+                              "trend":  "cheaper",
+                              "source":  "GST.html",
+                              "key":  "corrective spectacles"
+                          },
+                          {
+                              "description":  "ðŸšœ Tractor Tyres \u0026amp; Parts",
+                              "from":  18,
+                              "to":  5,
+                              "change_pp":  -13,
+                              "trend":  "cheaper",
+                              "source":  "GST.html",
+                              "key":  "tractor tyres amp parts"
+                          },
+                          {
+                              "description":  "ðŸšœ Tractors",
+                              "from":  12,
+                              "to":  5,
+                              "change_pp":  -7,
+                              "trend":  "cheaper",
+                              "source":  "GST.html",
+                              "key":  "tractors"
+                          },
+                          {
+                              "description":  "ðŸŒ± Bio-Pesticides, Micro-Nutrients",
+                              "from":  12,
+                              "to":  5,
+                              "change_pp":  -7,
+                              "trend":  "cheaper",
+                              "source":  "GST.html",
+                              "key":  "bio pesticides micro nutrients"
+                          },
+                          {
+                              "description":  "ðŸ’§ Drip Irrigation \u0026amp; Sprinklers",
+                              "from":  12,
+                              "to":  5,
+                              "change_pp":  -7,
+                              "trend":  "cheaper",
+                              "source":  "GST.html",
+                              "key":  "drip irrigation amp sprinklers"
+                          },
+                          {
+                              "description":  "ðŸŒ¾ Harvesting Machines",
+                              "from":  12,
+                              "to":  5,
+                              "change_pp":  -7,
+                              "trend":  "cheaper",
+                              "source":  "GST.html",
+                              "key":  "harvesting machines"
+                          },
+                          {
+                              "description":  "ðŸ—ºï¸ Maps, Charts, Globes",
+                              "from":  12,
+                              "to":  0,
+                              "change_pp":  -12,
+                              "trend":  "cheaper",
+                              "source":  "GST.html",
+                              "key":  "maps charts globes"
+                          },
+                          {
+                              "description":  "âœï¸ Pencils, Crayons, Sharpeners",
+                              "from":  12,
+                              "to":  0,
+                              "change_pp":  -12,
+                              "trend":  "cheaper",
+                              "source":  "GST.html",
+                              "key":  "pencils crayons sharpeners"
+                          },
+                          {
+                              "description":  "ðŸ““ Notebooks \u0026amp; Exercise Books",
+                              "from":  12,
+                              "to":  0,
+                              "change_pp":  -12,
+                              "trend":  "cheaper",
+                              "source":  "GST.html",
+                              "key":  "notebooks amp exercise books"
+                          },
+                          {
+                              "description":  "ðŸ©¶ Erasers",
+                              "from":  5,
+                              "to":  0,
+                              "change_pp":  -5,
+                              "trend":  "cheaper",
+                              "source":  "GST.html",
+                              "key":  "erasers"
+                          },
+                          {
+                              "description":  "ðŸš— Petrol/LPG/CNG Cars (â‰¤1200cc)",
+                              "from":  28,
+                              "to":  18,
+                              "change_pp":  -10,
+                              "trend":  "cheaper",
+                              "source":  "GST.html",
+                              "key":  "petrol lpg cng cars 1200cc"
+                          },
+                          {
+                              "description":  "ðŸš™ Diesel Hybrid Cars (â‰¤1500cc)",
+                              "from":  28,
+                              "to":  18,
+                              "change_pp":  -10,
+                              "trend":  "cheaper",
+                              "source":  "GST.html",
+                              "key":  "diesel hybrid cars 1500cc"
+                          },
+                          {
+                              "description":  "ðŸ›º 3-Wheelers",
+                              "from":  28,
+                              "to":  18,
+                              "change_pp":  -10,
+                              "trend":  "cheaper",
+                              "source":  "GST.html",
+                              "key":  "3 wheelers"
+                          },
+                          {
+                              "description":  "ðŸï¸ Motorcycles (â‰¤350cc)",
+                              "from":  28,
+                              "to":  18,
+                              "change_pp":  -10,
+                              "trend":  "cheaper",
+                              "source":  "GST.html",
+                              "key":  "motorcycles 350cc"
+                          },
+                          {
+                              "description":  "ðŸšš Goods Transport Vehicles",
+                              "from":  28,
+                              "to":  18,
+                              "change_pp":  -10,
+                              "trend":  "cheaper",
+                              "source":  "GST.html",
+                              "key":  "goods transport vehicles"
+                          },
+                          {
+                              "description":  "â„ï¸ Air Conditioners",
+                              "from":  28,
+                              "to":  18,
+                              "change_pp":  -10,
+                              "trend":  "cheaper",
+                              "source":  "GST.html",
+                              "key":  "air conditioners"
+                          },
+                          {
+                              "description":  "ðŸ“º TVs above 32\u0026quot;",
+                              "from":  28,
+                              "to":  18,
+                              "change_pp":  -10,
+                              "trend":  "cheaper",
+                              "source":  "GST.html",
+                              "key":  "tvs above 32 quot"
+                          },
+                          {
+                              "description":  "ðŸ–¥ï¸ Monitors \u0026amp; Projectors",
+                              "from":  28,
+                              "to":  18,
+                              "change_pp":  -10,
+                              "trend":  "cheaper",
+                              "source":  "GST.html",
+                              "key":  "monitors amp projectors"
+                          }
+                      ]
+}

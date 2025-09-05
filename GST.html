@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Next-Gen GST Reform – Interactive Infographic (DH, JS-enhanced)</title>
+
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Roboto+Slab:wght@400;500;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --dh-blue:#0091AC;
+  --dh-blue-ink:#067991;
+  --border:#e6e6e6;
+  --ink:#1c1c1c;
+  --muted:#6b6b6b;
+  --bg-lite:#f7fafa;
+  --red:#c1121f;
+  --green:#2a9d8f;
+  --drop:#e85d04;
+  --radius:10px;
+  --shadow:0 1px 2px rgba(0,0,0,.04);
+}
+*{box-sizing:border-box}
+body{margin:0;background:#fff;}
+.dh-gst-widget{
+  font-family:"Roboto Slab", serif;
+  color:var(--ink);
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  max-width:860px;
+  margin:16px auto;
+  padding:16px;
+  box-shadow:var(--shadow);
+}
+.dh-gst-title{
+  margin:0;
+  text-align:center;
+  font-size:28px;
+  line-height:1.2;
+  color:var(--dh-blue);
+  font-family:"Playfair Display", serif;
+}
+.dh-gst-kicker{
+  text-align:center;
+  color:var(--muted);
+  margin:.25rem 0 1rem;
+  font-size:14px;
+}
+.dh-card{
+  background:var(--bg-lite);
+  border:1px solid var(--border);
+  border-radius:8px;
+  padding:12px 12px;
+  margin-bottom:16px;
+}
+.dh-block-title{
+  margin:0 0 8px;
+  color:var(--dh-blue-ink);
+  font-weight:700;
+  font-family:"Playfair Display", serif;
+}
+.dh-list{list-style:none;margin:0;padding:0;}
+.dh-row{
+  display:flex;
+  justify-content:space-between;
+  gap:16px;
+  align-items:center;
+  padding:10px 0;
+  border-bottom:1px solid var(--border);
+}
+.dh-row:last-child{border-bottom:0;}
+.dh-name{flex:1;font-weight:500;}
+.dh-data{min-width:210px;text-align:right;white-space:nowrap;}
+.old{color:var(--red);font-weight:700;}
+.new{color:var(--green);font-weight:700;}
+.drop{background:var(--drop);color:#fff;border-radius:999px;padding:3px 8px;font-size:12px;margin-left:6px}
+details{border:1px solid var(--border);border-radius:8px;margin-bottom:12px;}
+summary{
+  list-style:none;
+  cursor:pointer;
+  padding:12px 14px;
+  font-family:"Playfair Display", serif;
+  font-weight:700;
+  color:var(--dh-blue);
+  position:relative;
+}
+summary::marker{display:none;}
+summary::after{
+  content:"▾";
+  position:absolute;
+  right:14px;
+  transition:transform .3s ease;
+}
+details[open] summary{
+  background:var(--dh-blue);
+  color:#fff;
+}
+details[open] summary::after{transform:rotate(180deg);}
+.dh-panel-inner{padding:8px 12px;}
+.dh-gst-footer{
+  margin-top:8px;
+  padding-top:12px;
+  border-top:2px solid var(--border);
+  font-size:13px;
+  color:var(--muted);
+  text-align:left;
+}
+@media (max-width: 640px){
+  .dh-gst-title{font-size:22px;}
+  .dh-row{flex-direction:column;align-items:center;text-align:center;}
+  .dh-name,.dh-data{width:100%;text-align:center;}
+  .dh-data{min-width:auto;}
+  .dh-gst-widget{border-left:none;border-right:none;border-radius:0;}
+}
+</style>
+</head>
+<body>
+
+<div class="dh-gst-widget">
+  <h2 class="dh-gst-title">Next-Gen GST Reform</h2>
+  <p class="dh-gst-kicker">Historic Diwali Gift • Better &amp; Simpler</p>
+
+  <!-- Highlights -->
+  <section class="dh-card" aria-label="Most impactful changes">
+    <h3 class="dh-block-title">Most Impactful Changes</h3>
+    <ul class="dh-list">
+      <li class="dh-row"><span class="dh-name">🛡️ Health &amp; Life Insurance</span><span class="dh-data"><span class="old">18%</span> → <span class="new">0%</span> <span class="drop">↓18 pp</span></span></li>
+      <li class="dh-row"><span class="dh-name">🚜 Tractor Tyres &amp; Parts</span><span class="dh-data"><span class="old">18%</span> → <span class="new">5%</span> <span class="drop">↓13 pp</span></span></li>
+      <li class="dh-row"><span class="dh-name">👓 Corrective Spectacles</span><span class="dh-data"><span class="old">12%</span> → <span class="new">5%</span> <span class="drop">↓7 pp</span></span></li>
+      <li class="dh-row"><span class="dh-name">🍿 Namkeens &amp; Mixtures</span><span class="dh-data"><span class="old">12%</span> → <span class="new">5%</span> <span class="drop">↓7 pp</span></span></li>
+    </ul>
+  </section>
+
+  <!-- Essentials -->
+  <details open>
+    <summary>🏠 Daily Essentials</summary>
+    <div class="dh-panel-inner">
+      <ul class="dh-list">
+        <li class="dh-row"><span class="dh-name">🧴 Hair Oil, Shampoo, Soap</span><span class="dh-data"><span class="old">18%</span> → <span class="new">5%</span> <span class="drop">↓13 pp</span></span></li>
+        <li class="dh-row"><span class="dh-name">🧈 Butter, Ghee, Cheese</span><span class="dh-data"><span class="old">12%</span> → <span class="new">5%</span> <span class="drop">↓7 pp</span></span></li>
+        <li class="dh-row"><span class="dh-name">🍿 Namkeens &amp; Mixtures</span><span class="dh-data"><span class="old">12%</span> → <span class="new">5%</span> <span class="drop">↓7 pp</span></span></li>
+        <li class="dh-row"><span class="dh-name">🍲 Utensils</span><span class="dh-data"><span class="old">12%</span> → <span class="new">5%</span> <span class="drop">↓7 pp</span></span></li>
+        <li class="dh-row"><span class="dh-name">🍼 Feeding Bottles, Diapers</span><span class="dh-data"><span class="old">12%</span> → <span class="new">5%</span> <span class="drop">↓7 pp</span></span></li>
+        <li class="dh-row"><span class="dh-name">🧵 Sewing Machines</span><span class="dh-data"><span class="old">12%</span> → <span class="new">5%</span> <span class="drop">↓7 pp</span></span></li>
+      </ul>
+    </div>
+  </details>
+
+  <!-- Healthcare -->
+  <details>
+    <summary>💊 Healthcare Relief</summary>
+    <div class="dh-panel-inner">
+      <ul class="dh-list">
+        <li class="dh-row"><span class="dh-name">🛡️ Health &amp; Life Insurance</span><span class="dh-data"><span class="old">18%</span> → <span class="new">0%</span> <span class="drop">↓18 pp</span></span></li>
+        <li class="dh-row"><span class="dh-name">🌡️ Thermometer</span><span class="dh-data"><span class="old">12%</span> → <span class="new">5%</span> <span class="drop">↓7 pp</span></span></li>
+        <li class="dh-row"><span class="dh-name">💨 Medical Oxygen</span><span class="dh-data"><span class="old">12%</span> → <span class="new">5%</span> <span class="drop">↓7 pp</span></span></li>
+        <li class="dh-row"><span class="dh-name">🧪 Diagnostic Kits</span><span class="dh-data"><span class="old">12%</span> → <span class="new">5%</span> <span class="drop">↓7 pp</span></span></li>
+        <li class="dh-row"><span class="dh-name">📊 Glucometer &amp; Test Strips</span><span class="dh-data"><span class="old">12%</span> → <span class="new">5%</span> <span class="drop">↓7 pp</span></span></li>
+        <li class="dh-row"><span class="dh-name">👓 Corrective Spectacles</span><span class="dh-data"><span class="old">12%</span> → <span class="new">5%</span> <span class="drop">↓7 pp</span></span></li>
+      </ul>
+    </div>
+  </details>
+
+  <!-- Agriculture -->
+  <details>
+    <summary>🚜 Farmers &amp; Agriculture</summary>
+    <div class="dh-panel-inner">
+      <ul class="dh-list">
+        <li class="dh-row"><span class="dh-name">🚜 Tractor Tyres &amp; Parts</span><span class="dh-data"><span class="old">18%</span> → <span class="new">5%</span> <span class="drop">↓13 pp</span></span></li>
+        <li class="dh-row"><span class="dh-name">🚜 Tractors</span><span class="dh-data"><span class="old">12%</span> → <span class="new">5%</span> <span class="drop">↓7 pp</span></span></li>
+        <li class="dh-row"><span class="dh-name">🌱 Bio-Pesticides, Micro-Nutrients</span><span class="dh-data"><span class="old">12%</span> → <span class="new">5%</span> <span class="drop">↓7 pp</span></span></li>
+        <li class="dh-row"><span class="dh-name">💧 Drip Irrigation &amp; Sprinklers</span><span class="dh-data"><span class="old">12%</span> → <span class="new">5%</span> <span class="drop">↓7 pp</span></span></li>
+        <li class="dh-row"><span class="dh-name">🌾 Harvesting Machines</span><span class="dh-data"><span class="old">12%</span> → <span class="new">5%</span> <span class="drop">↓7 pp</span></span></li>
+      </ul>
+    </div>
+  </details>
+
+  <!-- Education -->
+  <details>
+    <summary>📚 Education</summary>
+    <div class="dh-panel-inner">
+      <ul class="dh-list">
+        <li class="dh-row"><span class="dh-name">🗺️ Maps, Charts, Globes</span><span class="dh-data"><span class="old">12%</span> → <span class="new">0%</span> <span class="drop">↓12 pp</span></span></li>
+        <li class="dh-row"><span class="dh-name">✏️ Pencils, Crayons, Sharpeners</span><span class="dh-data"><span class="old">12%</span> → <span class="new">0%</span> <span class="drop">↓12 pp</span></span></li>
+        <li class="dh-row"><span class="dh-name">📓 Notebooks &amp; Exercise Books</span><span class="dh-data"><span class="old">12%</span> → <span class="new">0%</span> <span class="drop">↓12 pp</span></span></li>
+        <li class="dh-row"><span class="dh-name">🩶 Erasers</span><span class="dh-data"><span class="old">5%</span> → <span class="new">0%</span> <span class="drop">↓5 pp</span></span></li>
+      </ul>
+    </div>
+  </details>
+
+  <!-- Vehicles -->
+  <details>
+    <summary>🚗 Vehicles Made Affordable</summary>
+    <div class="dh-panel-inner">
+      <ul class="dh-list">
+        <li class="dh-row"><span class="dh-name">🚗 Petrol/LPG/CNG Cars (≤1200cc)</span><span class="dh-data"><span class="old">28%</span> → <span class="new">18%</span> <span class="drop">↓10 pp</span></span></li>
+        <li class="dh-row"><span class="dh-name">🚙 Diesel Hybrid Cars (≤1500cc)</span><span class="dh-data"><span class="old">28%</span> → <span class="new">18%</span> <span class="drop">↓10 pp</span></span></li>
+        <li class="dh-row"><span class="dh-name">🛺 3-Wheelers</span><span class="dh-data"><span class="old">28%</span> → <span class="new">18%</span> <span class="drop">↓10 pp</span></span></li>
+        <li class="dh-row"><span class="dh-name">🏍️ Motorcycles (≤350cc)</span><span class="dh-data"><span class="old">28%</span> → <span class="new">18%</span> <span class="drop">↓10 pp</span></span></li>
+        <li class="dh-row"><span class="dh-name">🚚 Goods Transport Vehicles</span><span class="dh-data"><span class="old">28%</span> → <span class="new">18%</span> <span class="drop">↓10 pp</span></span></li>
+      </ul>
+    </div>
+  </details>
+
+  <!-- Electronics -->
+  <details>
+    <summary>📺 Electronics</summary>
+    <div class="dh-panel-inner">
+      <ul class="dh-list">
+        <li class="dh-row"><span class="dh-name">❄️ Air Conditioners</span><span class="dh-data"><span class="old">28%</span> → <span class="new">18%</span> <span class="drop">↓10 pp</span></span></li>
+        <li class="dh-row"><span class="dh-name">📺 TVs above 32&quot;</span><span class="dh-data"><span class="old">28%</span> → <span class="new">18%</span> <span class="drop">↓10 pp</span></span></li>
+        <li class="dh-row"><span class="dh-name">🖥️ Monitors &amp; Projectors</span><span class="dh-data"><span class="old">28%</span> → <span class="new">18%</span> <span class="drop">↓10 pp</span></span></li>
+        <li class="dh-row"><span class="dh-name">🍽️ Dish Washing Machines</span><span class="dh-data"><span class="old">28%</span> → <span class="new">18%</span> <span class="drop">↓10 pp</span></span></li>
+      </ul>
+    </div>
+  </details>
+
+  <footer class="dh-gst-footer">
+    <span>Source: Government of India (CBIC)</span>
+  </footer>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const accordions = document.querySelectorAll("details");
+  const SCROLL_OFFSET = 100; // px
+
+  accordions.forEach(acc => {
+    acc.addEventListener("toggle", () => {
+      if (acc.open) {
+        // Close others
+        accordions.forEach(o => { if (o !== acc) o.removeAttribute("open"); });
+        // Scroll with offset so the summary sits a bit below the top edge
+        setTimeout(() => {
+          const rect = acc.getBoundingClientRect();
+          const y = rect.top + window.scrollY - SCROLL_OFFSET;
+          window.scrollTo({ top: y, behavior: "smooth" });
+        }, 150);
+      }
+    });
+  });
+});
+</script>
+
+</body>
+</html>

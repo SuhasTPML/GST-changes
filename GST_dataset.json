@@ -1,0 +1,498 @@
+﻿{
+  "🚜 Agriculture": [
+    {
+      "description": "Bio-Pesticides, Micro-Nutrients",
+      "from": 12,
+      "to": 5,
+      "change_pp": -7
+    },
+    {
+      "description": "Drip Irrigation & Sprinklers",
+      "from": 12,
+      "to": 5,
+      "change_pp": -7
+    }
+  ],
+  "👕 Apparel & Accessories": [
+    {
+      "description": "Apparel over Rs 2,500",
+      "from": 12,
+      "to": 18,
+      "change_pp": 6
+    },
+    {
+      "description": "Footwear less than Rs.2500 per pair",
+      "from": 12,
+      "to": 5,
+      "change_pp": -7
+    },
+    {
+      "description": "Handbags",
+      "from": 12,
+      "to": 5,
+      "change_pp": -7
+    },
+    {
+      "description": "Handmade/hand embroidered shawls",
+      "from": 12,
+      "to": 5,
+      "change_pp": -7
+    },
+    {
+      "description": "Umbrellas",
+      "from": 12,
+      "to": 5,
+      "change_pp": -7
+    }
+  ],
+  "🚗 Automotive": [
+    {
+      "description": "3-Wheelers",
+      "from": 28,
+      "to": 18,
+      "change_pp": -10
+    },
+    {
+      "description": "Ambulances",
+      "from": 28,
+      "to": 18,
+      "change_pp": -10
+    },
+    {
+      "description": "Bodies for the motor vehicles",
+      "from": 28,
+      "to": 18,
+      "change_pp": -10
+    },
+    {
+      "description": "Bumpers and parts thereof for tractors",
+      "from": 18,
+      "to": 5,
+      "change_pp": -13
+    },
+    {
+      "description": "Diesel cars of engine capacity not exceeding 1500 cc and of length not exceeding 4000 mm",
+      "from": 28,
+      "to": 18,
+      "change_pp": -10
+    },
+    {
+      "description": "Goods Transport Vehicles",
+      "from": 28,
+      "to": 18,
+      "change_pp": -10
+    },
+    {
+      "description": "Motor cars other",
+      "from": 28,
+      "to": 40,
+      "change_pp": 12
+    },
+    {
+      "description": "Motorcycles",
+      "from": 28,
+      "to": 18,
+      "change_pp": -10
+    },
+    {
+      "description": "Petrol cars of engine capacity not exceeding 1200cc and of length not exceeding 4000 mm",
+      "from": 28,
+      "to": 18,
+      "change_pp": -10
+    }
+  ],
+  "🍔 Food & Beverages": [
+    {
+      "description": "Aerated beverages containing sugar",
+      "from": 28,
+      "to": 40,
+      "change_pp": 12
+    },
+    {
+      "description": "All goods incl. refined sugar containing added flavouring or colouring matter, sugar cubes",
+      "from": 12,
+      "to": 5,
+      "change_pp": -7
+    },
+    {
+      "description": "Beverages containing milk",
+      "from": 12,
+      "to": 5,
+      "change_pp": -7
+    },
+    {
+      "description": "Butter, Ghee, Cheese",
+      "from": 12,
+      "to": 5,
+      "change_pp": -7
+    },
+    {
+      "description": "Chocolates and other food preparations",
+      "from": 18,
+      "to": 5,
+      "change_pp": -13
+    },
+    {
+      "description": "Coffee",
+      "from": 12,
+      "to": 5,
+      "change_pp": -7
+    },
+    {
+      "description": "Condensed milk",
+      "from": 12,
+      "to": 5,
+      "change_pp": -7
+    },
+    {
+      "description": "Confectionery",
+      "from": 18,
+      "to": 5,
+      "change_pp": -13
+    },
+    {
+      "description": "Dates",
+      "from": 12,
+      "to": 5,
+      "change_pp": -7
+    },
+    {
+      "description": "Diabetic foods",
+      "from": 12,
+      "to": 5,
+      "change_pp": -7
+    },
+    {
+      "description": "Fish and caviar, prepared and preserved",
+      "from": 12,
+      "to": 5,
+      "change_pp": -7
+    },
+    {
+      "description": "Ice cream",
+      "from": 18,
+      "to": 5,
+      "change_pp": -13
+    },
+    {
+      "description": "Jams and fruit jellies",
+      "from": 12,
+      "to": 5,
+      "change_pp": -7
+    },
+    {
+      "description": "Mustard, mayonnaise",
+      "from": 12,
+      "to": 5,
+      "change_pp": -7
+    },
+    {
+      "description": "Namkeens & Mixtures",
+      "from": 12,
+      "to": 5,
+      "change_pp": -7
+    },
+    {
+      "description": "Paneer of chenna",
+      "from": 5,
+      "to": 0,
+      "change_pp": -5
+    },
+    {
+      "description": "Paratha, parotta and other Indian breads by any name called",
+      "from": 18,
+      "to": 0,
+      "change_pp": -18
+    },
+    {
+      "description": "Pasta",
+      "from": 12,
+      "to": 5,
+      "change_pp": -7
+    },
+    {
+      "description": "Pastry, cakes, biscuits bread",
+      "from": 18,
+      "to": 5,
+      "change_pp": -13
+    },
+    {
+      "description": "Pizza bread",
+      "from": 5,
+      "to": 0,
+      "change_pp": -5
+    },
+    {
+      "description": "Plant-based milk",
+      "from": 18,
+      "to": 5,
+      "change_pp": -13
+    },
+    {
+      "description": "Shrimps and prawns, prepared and preserved",
+      "from": 12,
+      "to": 5,
+      "change_pp": -7
+    },
+    {
+      "description": "Soups and broth",
+      "from": 18,
+      "to": 5,
+      "change_pp": -13
+    },
+    {
+      "description": "Tender coconut water",
+      "from": 12,
+      "to": 5,
+      "change_pp": -7
+    },
+    {
+      "description": "Waters, including natural or artificial mineral waters and aerated waters",
+      "from": 18,
+      "to": 5,
+      "change_pp": -13
+    }
+  ],
+  "🏠 Household Goods": [
+    {
+      "description": "Agarbatti",
+      "from": 12,
+      "to": 18,
+      "change_pp": 6
+    },
+    {
+      "description": "Candles, tapers and the like",
+      "from": 12,
+      "to": 5,
+      "change_pp": -7
+    },
+    {
+      "description": "Monitors & Projectors",
+      "from": 28,
+      "to": 18,
+      "change_pp": -10
+    },
+    {
+      "description": "TVs above 32\"",
+      "from": 28,
+      "to": 18,
+      "change_pp": -10
+    },
+    {
+      "description": "Utensils",
+      "from": 12,
+      "to": 5,
+      "change_pp": -7
+    },
+    {
+      "description": "Wood, stone idols",
+      "from": 12,
+      "to": 5,
+      "change_pp": -7
+    }
+  ],
+  "💎 Luxury & Sin Goods": [
+    {
+      "description": "Bidis",
+      "from": 28,
+      "to": 18,
+      "change_pp": -10
+    },
+    {
+      "description": "Cigars and cigarettes",
+      "from": 28,
+      "to": 40,
+      "change_pp": 12
+    },
+    {
+      "description": "Pan masala",
+      "from": 28,
+      "to": 40,
+      "change_pp": 12
+    },
+    {
+      "description": "Revolvers and pistols",
+      "from": 28,
+      "to": 40,
+      "change_pp": 12
+    },
+    {
+      "description": "Smoking pipes",
+      "from": 28,
+      "to": 40,
+      "change_pp": 12
+    }
+  ],
+  "⚕️ Medical & Health": [
+    {
+      "description": "All diagnostic kits",
+      "from": 12,
+      "to": 5,
+      "change_pp": -7
+    },
+    {
+      "description": "Bandages, dressing",
+      "from": 12,
+      "to": 5,
+      "change_pp": -7
+    },
+    {
+      "description": "Frames and mountings for spectacles, goggles or the like, and parts thereof",
+      "from": 12,
+      "to": 5,
+      "change_pp": -7
+    },
+    {
+      "description": "Glucometer & Test Strips",
+      "from": 12,
+      "to": 5,
+      "change_pp": -7
+    },
+    {
+      "description": "Health & Life Insurance",
+      "from": 18,
+      "to": 0,
+      "change_pp": -18
+    },
+    {
+      "description": "Medical Oxygen",
+      "from": 12,
+      "to": 5,
+      "change_pp": -7
+    },
+    {
+      "description": "Retail medicines",
+      "from": 12,
+      "to": 5,
+      "change_pp": -7
+    },
+    {
+      "description": "Thermometer",
+      "from": 12,
+      "to": 5,
+      "change_pp": -7
+    }
+  ],
+  "✨ Miscellaneous": [
+    {
+      "description": "Bicycles and other cycles (including delivery tricycles), not motorized",
+      "from": 12,
+      "to": 5,
+      "change_pp": -7
+    },
+    {
+      "description": "Caffeinated beverages",
+      "from": 28,
+      "to": 40,
+      "change_pp": 12
+    },
+    {
+      "description": "Hybrids with engine capacity not exceeding 1200cc and of length not exceeding 4000 mm",
+      "from": 28,
+      "to": 18,
+      "change_pp": -10
+    },
+    {
+      "description": "Non-alcoholic beverages",
+      "from": 18,
+      "to": 40,
+      "change_pp": 22
+    }
+  ],
+  "🧼 Personal Care": [
+    {
+      "description": "Combs, hair pins",
+      "from": 12,
+      "to": 5,
+      "change_pp": -7
+    },
+    {
+      "description": "Dental floss, toothpaste",
+      "from": 18,
+      "to": 5,
+      "change_pp": -13
+    },
+    {
+      "description": "Feeding Bottles, Diapers",
+      "from": 12,
+      "to": 5,
+      "change_pp": -7
+    },
+    {
+      "description": "Hair Oil, Shampoo, Soap",
+      "from": 18,
+      "to": 5,
+      "change_pp": -13
+    },
+    {
+      "description": "Shaving cream, shaving lotion, aftershave lotion",
+      "from": 18,
+      "to": 5,
+      "change_pp": -13
+    },
+    {
+      "description": "Toilet Soap",
+      "from": 18,
+      "to": 5,
+      "change_pp": -13
+    },
+    {
+      "description": "Tooth powder",
+      "from": 12,
+      "to": 5,
+      "change_pp": -7
+    }
+  ],
+  "☀️ Renewable Energy": [
+    {
+      "description": "PV cells",
+      "from": 12,
+      "to": 5,
+      "change_pp": -7
+    },
+    {
+      "description": "Silicon wafers",
+      "from": 12,
+      "to": 5,
+      "change_pp": -7
+    },
+    {
+      "description": "Wind mills",
+      "from": 12,
+      "to": 5,
+      "change_pp": -7
+    }
+  ],
+  "✏️ Stationery & School Supplies": [
+    {
+      "description": "Erasers",
+      "from": 5,
+      "to": 0,
+      "change_pp": -5
+    },
+    {
+      "description": "Exercise book, graph book, & laboratory notebook and notebooks",
+      "from": 12,
+      "to": 0,
+      "change_pp": -12
+    },
+    {
+      "description": "Maps",
+      "from": 12,
+      "to": 0,
+      "change_pp": -12
+    },
+    {
+      "description": "Mathematical boxes, geometry boxes and colour boxes",
+      "from": 12,
+      "to": 5,
+      "change_pp": -7
+    },
+    {
+      "description": "Pencils, Crayons, Sharpeners",
+      "from": 12,
+      "to": 0,
+      "change_pp": -12
+    }
+  ]
+}
