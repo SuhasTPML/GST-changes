@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(/C:\\Users\\suhas.bhandari\\Downloads\\Claude\\Misc\\GST Interactive/**)",
+      "Read(/C:\\Users\\suhas.bhandari\\Downloads\\Claude\\Misc\\GST Interactive/**)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
