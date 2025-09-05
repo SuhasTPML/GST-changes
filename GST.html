@@ -77,6 +77,13 @@ body{margin:0;background:#fff;}
 .old{color:var(--red);font-weight:700;}
 .new{color:var(--green);font-weight:700;}
 .drop{background:var(--drop);color:#fff;border-radius:999px;padding:3px 8px;font-size:12px;margin-left:6px}
+/* Arrow delta styles */
+.delta{border-radius:999px;padding:3px 8px;font-size:12px;margin-left:6px;border:1px solid transparent;font-weight:700}
+.delta-up{color:var(--green);border-color:var(--green);background:rgba(42,157,143,.08)}
+.delta-down{color:var(--red);border-color:var(--red);background:rgba(193,18,31,.08)}
+.delta-zero{color:var(--muted);border-color:var(--border);background:#fff}
+.kpi-up{color:var(--green);font-weight:700}
+.kpi-down{color:var(--red);font-weight:700}
 details{border:1px solid var(--border);border-radius:8px;margin-bottom:12px;}
 summary{
   list-style:none;
@@ -1004,8 +1011,13 @@ document.addEventListener("DOMContentLoaded", () => {
   function row(it){
     const li = el('li','dh-row'); li.id = it.id;
     const name = el('span','dh-name', it.description);
-    const data = el('span','dh-data'); const delta = (it.change_pp>=0?'+':'')+it.change_pp+' pp';
-    data.innerHTML = '<span class="old">'+it.from+'%</span> &rarr; <span class="new">'+it.to+'%</span> <span class="drop">'+delta+'</span>';
+    const data = el('span','dh-data');
+    const deltaText = (it.change_pp>=0?'+':'') + it.change_pp + ' pp';
+    let deltaClass = 'delta-zero'; let arrow = '';
+    if(it.change_pp>0){ deltaClass='delta-up'; arrow='▲'; }
+    else if(it.change_pp<0){ deltaClass='delta-down'; arrow='▼'; }
+    data.innerHTML = '<span class="old">'+it.from+'%</span> &rarr; <span class="new">'+it.to+'%</span> ' +
+      '<span class="delta '+deltaClass+'">'+arrow+' '+deltaText+'</span>';
     li.append(name,data); return li;
   }
 
@@ -1068,8 +1080,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const add = (label, value)=>{ const li=el('li','kpi-item'); li.innerHTML = '<strong>'+label+':</strong> '+value; ul.appendChild(li); };
     add('Cheaper', cheaper.length);
     add('Expensive', expensive.length);
-    if(biggestUp) add('Biggest increase', biggestUp.description+' (+'+biggestUp.change_pp+' pp)');
-    if(biggestDown) add('Biggest decrease', biggestDown.description+' ('+biggestDown.change_pp+' pp)');
+    if(biggestUp) add('Biggest increase', '<span class="kpi-up">▲</span> '+biggestUp.description+' (+'+biggestUp.change_pp+' pp)');
+    if(biggestDown) add('Biggest decrease', '<span class="kpi-down">▼</span> '+biggestDown.description+' ('+biggestDown.change_pp+' pp)');
     add('Average Δ', (avgDelta>0?'+':'')+avgDelta.toFixed(1)+' pp');
     card.append(h,ul); return card;
   }
