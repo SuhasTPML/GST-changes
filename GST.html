@@ -108,6 +108,21 @@ details[open] summary::after{transform:rotate(180deg);}
   color:var(--muted);
   text-align:left;
 }
+/* Phase 3: sticky toolbar, chips, combobox */
+.dh-toolbar-card{position:sticky;top:0;z-index:30;background:#fff;border:1px solid var(--border);border-radius:8px;box-shadow:var(--shadow);}
+.dh-toolbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:8px}
+.dh-toolbar input[type="search"], .dh-toolbar select{padding:6px 8px;border:1px solid var(--border);border-radius:6px;font-family:"Roboto Slab", serif}
+.chip-row{display:flex;gap:6px;overflow:auto;padding:0 8px 8px}
+.chip{border:1px solid var(--border);border-radius:999px;padding:4px 10px;cursor:pointer;background:#fff;white-space:nowrap}
+.chip.active{background:var(--dh-blue);border-color:var(--dh-blue);color:#fff}
+/* Combobox */
+.combo{position:relative;min-width:260px}
+.combo-list{position:absolute;left:0;right:0;top:100%;background:#fff;border:1px solid var(--border);border-radius:8px;box-shadow:var(--shadow);max-height:260px;overflow:auto;display:none;margin-top:4px}
+.combo-list.show{display:block}
+.combo-item{padding:8px 10px;cursor:pointer}
+.combo-item.hover{background:var(--bg-lite)}
+.flash{animation:flash 1.5s ease}
+@keyframes flash{0%{background:#fffacd}100%{background:transparent}}
 @media (max-width: 640px){
   .dh-gst-title{font-size:22px;}
   .dh-row{flex-direction:column;align-items:center;text-align:center;}
@@ -926,6 +941,174 @@ document.addEventListener("DOMContentLoaded", () => {
   render();
   // Remove legacy static content after enhanced render
   widget.querySelectorAll('details, section').forEach(n=>n.remove());
+})();
+</script>
+
+<script>
+(function(){
+  try {
+    const dataEl = document.getElementById('gst-data');
+    const root = document.getElementById('gst-root');
+    const widget = document.querySelector('.dh-gst-widget');
+    if(!dataEl || !root || !widget) return;
+    if(document.querySelector('[aria-label="Filters and sorting"]')) return;
+    let data = JSON.parse(dataEl.textContent || '[]');
+    if(!Array.isArray(data)){
+      if(data && typeof data === 'object'){
+        data = Object.entries(data).flatMap(([sector, list]) => Array.isArray(list) ? list.map(it => Object.assign({ sector }, it)) : []);
+      } else { data = []; }
+    }
+    const items = data.map(it => {
+      const from = Number(it.from); const to = Number(it.to);
+      const change = Number.isFinite(it.change_pp) ? Number(it.change_pp) : (to - from);
+      const trend = it.trend ? String(it.trend) : (change > 0 ? 'expensive' : change < 0 ? 'cheaper' : 'no_change');
+      return Object.assign({}, it, {from, to, change_pp: change, trend});
+    });
+    const hasSectors = items.some(i => i.sector);
+    const sectors = Array.from(new Set(items.map(i => i.sector).filter(Boolean))).sort();
+    const qs = new URLSearchParams(location.search);
+    const state = { q:(qs.get('q')||'').trim(), trend: qs.get('trend')||'all', sector: qs.get('sector')||'all', sort: qs.get('sort')||'change_desc' };
+    const cmp = { change_desc:(a,b)=>Math.abs(b.change_pp)-Math.abs(a.change_pp), change_asc:(a,b)=>Math.abs(a.change_pp)-Math.abs(b.change_pp), to_desc:(a,b)=>b.to-a.to, to_asc:(a,b)=>a.to-b.to, from_desc:(a,b)=>b.from-a.from, from_asc:(a,b)=>a.from-b.from, az:(a,b)=>(a.description||'').localeCompare(b.description||''), za:(a,b)=>(b.description||'').localeCompare(a.description||'') };
+    const el = (t,c,txt)=>{ const n=document.createElement(t); if(c) n.className=c; if(txt!=null) n.textContent=txt; return n; };
+    function writeState(){ const p=new URLSearchParams(); if(state.q) p.set('q',state.q); if(state.trend!=='all') p.set('trend',state.trend); if(hasSectors && state.sector!=='all') p.set('sector',state.sector); if(state.sort!=='change_desc') p.set('sort',state.sort); const u=new URL(location.href); u.search=p.toString(); history.replaceState(null,'',u); }
+    function filterItems(){ const q=state.q.toLowerCase(); return items.filter(i=>{ if(state.trend!=='all' && i.trend!==state.trend) return false; if(hasSectors && state.sector!=='all' && (i.sector||'')!==state.sector) return false; if(q && !(i.description||'').toLowerCase().includes(q)) return false; return true; }); }
+    function row(it){ const li=el('li','dh-row'); const name=el('span','dh-name', it.description); const data=el('span','dh-data'); const delta=(it.change_pp>=0?'+':'')+it.change_pp+' pp'; data.innerHTML = '<span class="old">'+it.from+'%</span> &rarr; <span class="new">'+it.to+'%</span> <span class="drop">'+delta+'</span>'; li.append(name,data); return li; }
+    function card(title, arr){ if(!arr||arr.length===0) return null; const wrap=el('div','dh-card'); const h=el('h3','dh-block-title',title); const ul=el('ul','dh-list'); arr.slice().sort(cmp[state.sort]||cmp.change_desc).forEach(i=>ul.appendChild(row(i))); wrap.append(h,ul); return wrap; }
+    function buildToolbar(){ const card=el('div','dh-card'); card.setAttribute('role','region'); card.setAttribute('aria-label','Filters and sorting'); const h=el('h3','dh-block-title','Filters & Sorting'); const wrap=el('div','dh-toolbar'); const search=el('input'); search.type='search'; search.placeholder='Search items'; search.value=state.q; const trend=el('select'); ['all','cheaper','expensive'].forEach(v=>{ const o=document.createElement('option'); o.value=v; o.textContent=v; o.selected=(v===state.trend); trend.appendChild(o); }); let sectorSel=null; if(hasSectors){ sectorSel=document.createElement('select'); sectorSel.appendChild(new Option('all','all',false,state.sector==='all')); sectors.forEach(s=> sectorSel.appendChild(new Option(s,s,false,state.sector===s))); } const sort=document.createElement('select'); [['change_desc','Delta pp (desc)'],['change_asc','Delta pp (asc)'],['to_desc','New % (desc)'],['to_asc','New % (asc)'],['from_desc','Old % (desc)'],['from_asc','Old % (asc)'],['az','A-Z'],['za','Z-A']].forEach(([v,l])=>{ const o=new Option(l,v,false,state.sort===v); sort.appendChild(o); }); let t; search.addEventListener('input',()=>{ clearTimeout(t); t=setTimeout(()=>{ state.q=search.value.trim(); writeState(); render(); },200); }); trend.addEventListener('change',()=>{ state.trend=trend.value; writeState(); render(); }); if(sectorSel) sectorSel.addEventListener('change',()=>{ state.sector=sectorSel.value; writeState(); render(); }); sort.addEventListener('change',()=>{ state.sort=sort.value; writeState(); render(); }); wrap.append(search,trend); if(sectorSel) wrap.append(sectorSel); wrap.append(sort); card.append(h,wrap); return card; }
+    function buildSummary(list){ const s=el('div','dh-card'); const h=el('h3','dh-block-title','GST Changes Summary'); const cheaper=list.filter(i=>i.trend==='cheaper').length; const expensive=list.filter(i=>i.trend==='expensive').length; const p=el('p',null,'Cheaper: '+cheaper+' | Expensive: '+expensive); s.append(h,p); return s; }
+    function render(){ root.innerHTML=''; const filtered=filterItems(); root.appendChild(buildSummary(filtered)); root.appendChild(buildToolbar()); const byTrend=filtered.reduce((a,it)=>{ (a[it.trend]||(a[it.trend]=[])).push(it); return a; },{}); const c1=card('Cheaper', byTrend.cheaper||[]); if(c1) root.appendChild(c1); const c2=card('Expensive', byTrend.expensive||[]); if(c2) root.appendChild(c2); }
+    render(); widget.querySelectorAll('details, section').forEach(n=>n.remove());
+  } catch(e){ console.warn('Phase3 renderer skipped:', e); }
+})();
+</script>
+
+<script>
+(function(){
+  // Category-first renderer with sticky toolbar and dropdown search
+  const dataEl = document.getElementById('gst-data');
+  const root = document.getElementById('gst-root');
+  const widget = document.querySelector('.dh-gst-widget');
+  if(!dataEl || !root || !widget) return;
+  let data = [];
+  try{ data = JSON.parse(dataEl.textContent||'[]'); }catch(e){ console.warn('Bad JSON'); return; }
+  if(!Array.isArray(data)){
+    if(data && typeof data === 'object'){
+      data = Object.entries(data).flatMap(([sector,list]) => Array.isArray(list) ? list.map(it => Object.assign({sector}, it)) : []);
+    } else { data = []; }
+  }
+  if(!data.length) return;
+
+  function compute(it){
+    const from = Number(it.from); const to = Number(it.to);
+    const change = Number.isFinite(it.change_pp) ? Number(it.change_pp) : (to - from);
+    const trend = it.trend ? String(it.trend) : (change > 0 ? 'expensive' : change < 0 ? 'cheaper' : 'no_change');
+    const sector = it.sector || 'General';
+    const id = 'item-' + (it.description||'').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/(^-|-$)/g,'');
+    return Object.assign({}, it, {from,to,change_pp:change, trend, sector, id});
+  }
+  const items = data.map(compute);
+  const sectors = Array.from(new Set(items.map(i=>i.sector))).sort();
+
+  const qs = new URLSearchParams(location.search);
+  const state = {
+    sector: qs.get('sector') || 'all',
+    trend: qs.get('trend') || 'all',
+    sort: qs.get('sort') || 'change_desc'
+  };
+  function writeState(){
+    const p = new URLSearchParams();
+    if(state.sector!=='all') p.set('sector', state.sector);
+    if(state.trend!=='all') p.set('trend', state.trend);
+    if(state.sort!=='change_desc') p.set('sort', state.sort);
+    const u = new URL(location.href); u.search = p.toString(); history.replaceState(null,'',u);
+  }
+
+  const cmp = {
+    change_desc:(a,b)=> Math.abs(b.change_pp) - Math.abs(a.change_pp),
+    change_asc:(a,b)=> Math.abs(a.change_pp) - Math.abs(b.change_pp),
+    to_desc:(a,b)=> b.to - a.to,
+    to_asc:(a,b)=> a.to - b.to,
+    from_desc:(a,b)=> b.from - a.from,
+    from_asc:(a,b)=> a.from - b.from,
+    az:(a,b)=> (a.description||'').localeCompare(b.description||''),
+    za:(a,b)=> (b.description||'').localeCompare(a.description||'')
+  };
+
+  function el(tag, cls, text){ const n=document.createElement(tag); if(cls) n.className=cls; if(text!=null) n.textContent=text; return n; }
+  function row(it){
+    const li = el('li','dh-row'); li.id = it.id;
+    const name = el('span','dh-name', it.description);
+    const data = el('span','dh-data'); const delta = (it.change_pp>=0?'+':'')+it.change_pp+' pp';
+    data.innerHTML = '<span class="old">'+it.from+'%</span> &rarr; <span class="new">'+it.to+'%</span> <span class="drop">'+delta+'</span>';
+    li.append(name,data); return li;
+  }
+
+  function buildToolbar(){
+    const card = el('div','dh-toolbar-card');
+    const wrap = el('div','dh-toolbar');
+
+    // Category chips
+    const chips = el('div','chip-row');
+    function renderChips(){
+      chips.innerHTML='';
+      const all = el('button','chip'+(state.sector==='all'?' active':''),'All'); all.onclick=()=>{state.sector='all'; writeState(); render();}; chips.append(all);
+      sectors.forEach(s=>{ const b=el('button','chip'+(state.sector===s?' active':''),s); b.onclick=()=>{ state.sector=s; writeState(); render(); }; chips.append(b); });
+    }
+    renderChips();
+
+    // Trend and Sort
+    const trend = document.createElement('select'); ['all','cheaper','expensive'].forEach(v=>{ const o=new Option(v,v,false,state.trend===v); trend.appendChild(o); });
+    trend.onchange=()=>{ state.trend=trend.value; writeState(); render(); };
+    const sort = document.createElement('select'); [['change_desc','Delta pp (desc)'],['change_asc','Delta pp (asc)'],['to_desc','New % (desc)'],['to_asc','New % (asc)'],['from_desc','Old % (desc)'],['from_asc','Old % (asc)'],['az','A-Z'],['za','Z-A']].forEach(([v,l])=>{ sort.appendChild(new Option(l,v,false,state.sort===v)); });
+    sort.onchange=()=>{ state.sort=sort.value; writeState(); render(); };
+
+    // Combobox search
+    const combo = el('div','combo');
+    const search = document.createElement('input'); search.type='search'; search.placeholder='Search & jump to item…';
+    const list = el('div','combo-list');
+    combo.append(search,list);
+    let hoverIndex = -1; let visible = [];
+    function openList(){ list.classList.add('show'); }
+    function closeList(){ list.classList.remove('show'); hoverIndex=-1; }
+    function renderList(q){
+      const qq = (q||'').toLowerCase();
+      visible = !qq ? [] : items.filter(i=> (i.description||'').toLowerCase().includes(qq)).slice(0,20);
+      list.innerHTML='';
+      visible.forEach((it,idx)=>{ const d=el('div','combo-item',it.description); d.onmouseenter=()=>{ setHover(idx); }; d.onclick=()=>select(idx); list.append(d); });
+      if(visible.length){ openList(); } else { closeList(); }
+    }
+    function setHover(i){ hoverIndex=i; Array.from(list.children).forEach((n,ix)=> n.classList.toggle('hover', ix===hoverIndex)); }
+    function select(i){ if(i<0||i>=visible.length) return; const it=visible[i]; closeList(); search.value=it.description; const target=document.getElementById(it.id); if(target){ target.classList.add('flash'); target.scrollIntoView({behavior:'smooth', block:'center'}); setTimeout(()=>target.classList.remove('flash'),1500); } }
+    search.addEventListener('input',()=>renderList(search.value));
+    search.addEventListener('keydown', (e)=>{ if(!list.classList.contains('show')) return; if(e.key==='ArrowDown'){ e.preventDefault(); setHover(Math.min(visible.length-1, hoverIndex+1)); } else if(e.key==='ArrowUp'){ e.preventDefault(); setHover(Math.max(0, hoverIndex-1)); } else if(e.key==='Enter'){ e.preventDefault(); select(hoverIndex===-1?0:hoverIndex); } else if(e.key==='Escape'){ closeList(); } });
+    document.addEventListener('click', (e)=>{ if(!combo.contains(e.target)) closeList(); });
+
+    wrap.append(combo, trend, sort);
+    card.append(wrap, chips);
+    return card;
+  }
+
+  function render(){
+    root.innerHTML='';
+    // Sticky toolbar
+    root.appendChild(buildToolbar());
+
+    // Group by sector
+    const bySector = items.reduce((a,it)=>{ if(state.trend!=='all' && it.trend!==state.trend) return a; if(state.sector!=='all' && it.sector!==state.sector) return a; (a[it.sector]||(a[it.sector]=[])).push(it); return a; }, {});
+    Object.keys(bySector).sort().forEach(sector=>{
+      const list = bySector[sector].slice().sort(cmp[state.sort]||cmp.change_desc);
+      const card = el('div','dh-card');
+      const h = el('h3','dh-block-title', sector);
+      const ul = el('ul','dh-list'); list.forEach(it=> ul.appendChild(row(it)));
+      card.append(h,ul);
+      root.appendChild(card);
+    });
+
+    // remove any legacy sections to avoid duplicates
+    widget.querySelectorAll('details, section').forEach(n=>n.remove());
+  }
+
+  render();
 })();
 </script>
 
