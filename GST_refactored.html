@@ -423,8 +423,8 @@ details[open] summary::after{transform:rotate(180deg);}
   .dh-toolbar-label{min-width:auto;}
   .combo{min-width:200px;flex:1;}
   .chip-row{padding:12px 16px;gap:6px;}
-  .chip{padding:8px 12px;font-size:13px;}
-  .dh-button-group .chip{padding:8px 12px;}
+  .chip{padding:6px 10px;font-size:12px;}
+  .dh-button-group .chip{padding:6px 10px;}
 }
 
 @media (max-width: 640px){
@@ -434,8 +434,8 @@ details[open] summary::after{transform:rotate(180deg);}
   .combo{min-width:100%;}
   .dh-toolbar input[type="search"], .dh-toolbar select{width:100%;}
   .combo-list{max-height:50vh;}
-  .chip-row{gap:6px; padding:10px 12px; margin:0 -12px;}
-  .chip{padding:6px 10px; font-size:12px; min-width:fit-content;}
+  .chip-row{gap:4px; padding:8px 10px; margin:0 -12px;}
+  .chip{padding:4px 8px; font-size:11px; min-width:fit-content;}
   .dh-gst-widget{width:100%; max-width:none; margin:0; padding:12px; border-radius:0;}
 }
 @media (max-width: 640px){
@@ -1054,10 +1054,8 @@ details[open] summary::after{transform:rotate(180deg);}
       stat.innerHTML = '<div class="dh-stat-label">'+label+'</div><div class="dh-stat-value '+(trend||'')+'">'+value+'</div>';
       countStats.appendChild(stat);
     };
-    addStat('Total Items', list.length);
     addStat('Cheaper', cheaper.length, 'stat-positive');
     addStat('Expensive', expensive.length, 'stat-negative');
-    addStat('Average Change', (avgDelta>0?'+':'')+avgDelta.toFixed(1)+'%', avgDelta > 0 ? 'stat-negative' : 'stat-positive');
     countCard.append(countTitle, countStats);
     
     // Impact highlights card (only show if there are items)
@@ -1262,10 +1260,8 @@ details[open] summary::after{transform:rotate(180deg);}
       stat.innerHTML = '<div class="dh-stat-label">'+label+'</div><div class="dh-stat-value '+(trend||'')+'">'+value+'</div>';
       countStats.appendChild(stat);
     };
-    addStat('Total Items', list.length);
     addStat('Cheaper', cheaper.length, 'stat-positive');
     addStat('Expensive', expensive.length, 'stat-negative');
-    addStat('Average Change', (avgDelta>0?'+':'')+avgDelta.toFixed(1)+'%', avgDelta > 0 ? 'stat-negative' : 'stat-positive');
     countCard.append(countTitle, countStats);
     
     if(biggestUp || biggestDown) {
@@ -1296,11 +1292,9 @@ details[open] summary::after{transform:rotate(180deg);}
 
   function render(){
     root.innerHTML='';
-    const q = state.q.toLowerCase();
     const filteredAll = itemsComputed.filter(i=>
       (state.trend==='all'||i.trend===state.trend) &&
-      (state.sector==='all'||i.sector===state.sector) &&
-      (!q || (i.description||'').toLowerCase().includes(q))
+      (state.sector==='all'||i.sector===state.sector)
     );
     root.appendChild(buildSummaryCards(filteredAll));
     const toolbar = buildToolbar();
