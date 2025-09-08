@@ -315,7 +315,6 @@ body{margin:0;background:#fff;scroll-behavior:smooth;}
 .dh-data{min-width:210px;text-align:right;white-space:nowrap;}
 .old{color:var(--red);font-weight:700;position:relative;}
 .new{color:var(--green);font-weight:700;position:relative;}
-.drop{background:var(--drop);color:#fff;border-radius:999px;padding:4px 12px;font-size:12px;margin-left:8px;font-weight:600;box-shadow:0 2px 4px rgba(232, 93, 4, 0.3);}
 .old::before, .new::before{
   content:'';
   position:absolute;
@@ -455,6 +454,13 @@ details[open] summary::after{transform:rotate(180deg);}
 <div class="dh-gst-widget animate-fade-in">
   <h2 class="dh-gst-title">Next-Gen GST Reform</h2>
   <p class="dh-gst-kicker">Historic Diwali Gift • Better &amp; Simpler</p>
+
+  <noscript>
+    <div class="dh-card">
+      <h3 class="dh-block-title">Interactive View Requires JavaScript</h3>
+      <p>Please enable JavaScript to explore categories, filters, and changes.</p>
+    </div>
+  </noscript>
 
 
   <div id="gst-root"></div>
@@ -958,34 +964,6 @@ details[open] summary::after{transform:rotate(180deg);}
     }
   ]
 }</script>
-
-  <footer class="dh-gst-footer">
-    <span>Source: Government of India (CBIC)</span>
-  </footer>
-</div>
-
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-  const accordions = document.querySelectorAll("details");
-  const SCROLL_OFFSET = 100; // px
-
-  accordions.forEach(acc => {
-    acc.addEventListener("toggle", () => {
-      if (acc.open) {
-        // Close others
-        accordions.forEach(o => { if (o !== acc) o.removeAttribute("open"); });
-        // Scroll with offset so the summary sits a bit below the top edge
-        setTimeout(() => {
-          const rect = acc.getBoundingClientRect();
-          const y = rect.top + window.scrollY - SCROLL_OFFSET;
-          window.scrollTo({ top: y, behavior: "smooth" });
-        }, 150);
-      }
-    });
-  });
-});
-</script>
-
 <script>
 (function(){
   const dataEl = document.getElementById('gst-data');
@@ -1135,6 +1113,167 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // remove any legacy sections to avoid duplicates
     widget.querySelectorAll('details, section').forEach(n=>n.remove());
+  }
+
+  render();
+})();
+</script>
+
+</body>
+</html>
+<script>
+(function(){
+  const dataEl = document.getElementById('gst-data');
+  const root = document.getElementById('gst-root');
+  const widget = document.querySelector('.dh-gst-widget');
+  if(!dataEl || !root || !widget) return;
+  let items = [];
+  try { items = JSON.parse(dataEl.textContent || '[]'); } catch(e){ return; }
+  if(!Array.isArray(items)){
+    if(items && typeof items === 'object'){
+      items = Object.entries(items)
+        .flatMap(([sector, list]) => Array.isArray(list) ? list.map(it => Object.assign({ sector }, it)) : []);
+    } else { items = []; }
+  }
+  if(items.length === 0) return;
+
+  function compute(it){
+    const from = Number(it.from);
+    const to = Number(it.to);
+    const change = Number.isFinite(it.change_pp) ? Number(it.change_pp) : (to - from);
+    const trend = change > 0 ? 'expensive' : change < 0 ? 'cheaper' : 'no_change';
+    const sector = it.sector || 'General';
+    const id = 'item-' + (it.description||'').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/(^-|-$)/g,'');
+    return Object.assign({}, it, { from, to, change_pp: change, trend, sector, id });
+  }
+  const itemsComputed = items.map(compute);
+  const sectors = Array.from(new Set(itemsComputed.map(i=>i.sector))).sort();
+
+  const qs = new URLSearchParams(location.search);
+  const state = {
+    sector: qs.get('sector') || 'all',
+    trend: qs.get('trend') || 'all'
+  };
+  function writeState(){
+    const p = new URLSearchParams();
+    if(state.sector!=='all') p.set('sector', state.sector);
+    if(state.trend!=='all') p.set('trend', state.trend);
+    const u = new URL(location.href); u.search = p.toString(); history.replaceState(null,'',u);
+  }
+
+  const defaultSort = (a,b)=> Math.abs(b.change_pp) - Math.abs(a.change_pp);
+
+  function el(tag, cls, text){ const n=document.createElement(tag); if(cls) n.className=cls; if(text!=null) n.textContent=text; return n; }
+  function row(it){
+    const li = el('li','dh-row'); li.id = it.id;
+    const name = el('span','dh-name', it.description);
+    const data = el('span','dh-data');
+    const cls = it.change_pp>0?'delta-up':it.change_pp<0?'delta-down':'delta-zero';
+    const label = it.change_pp === 0 ? 'No change' : Math.abs(it.change_pp) + '% ' + (it.change_pp>0?'higher':'lower');
+    data.innerHTML = '<span class="old">'+it.from+'%</span> &rarr; <span class="new">'+it.to+'%</span> ' +
+      '<span class="delta '+cls+'" aria-label="'+label+'">'+label+'</span>';
+    li.append(name,data); return li;
+  }
+
+  function buildToolbar(){
+    const card = el('div','dh-toolbar-card');
+    const wrap = el('div','dh-toolbar');
+
+    // Trend filter buttons
+    const trendGroup = el('div', 'dh-toolbar-controls');
+    const trendLabel = el('label', 'dh-toolbar-label', 'Filter:');
+    const trendButtons = el('div', 'dh-button-group');
+    ['all','cheaper','expensive'].forEach(v=>{
+      const btn = el('button','chip'+(state.trend===v?' active':''), v === 'all' ? 'All' : v.charAt(0).toUpperCase()+v.slice(1));
+      btn.onclick=()=>{ state.trend=v; writeState(); render(); };
+      trendButtons.append(btn);
+    });
+    trendGroup.append(trendLabel, trendButtons);
+
+    // Category chips row
+    const chips = el('div','chip-row');
+    function renderChips(){
+      chips.innerHTML='';
+      const all = el('button','chip'+(state.sector==='all'?' active':''),'All Categories'); 
+      all.onclick=()=>{state.sector='all'; writeState(); render();}; 
+      chips.append(all);
+      sectors.forEach(s=>{ 
+        const b=el('button','chip'+(state.sector===s?' active':''),s); 
+        b.onclick=()=>{ state.sector=s; writeState(); render(); }; 
+        chips.append(b); 
+      });
+    }
+    renderChips();
+
+    wrap.append(trendGroup);
+    card.append(wrap, chips);
+    return card;
+  }
+
+  function buildSummaryCards(list){
+    const cheaper = list.filter(i=>i.trend==='cheaper');
+    const expensive = list.filter(i=>i.trend==='expensive');
+    const biggestUp = [...expensive].sort((a,b)=> b.change_pp - a.change_pp)[0];
+    const biggestDown = [...cheaper].sort((a,b)=> Math.abs(b.change_pp) - Math.abs(a.change_pp))[0];
+    const avgDelta = list.length ? (list.reduce((s,i)=> s + i.change_pp, 0)/list.length) : 0;
+    
+    const wrapper = el('div', 'dh-summary-wrapper');
+    const countCard = el('div','dh-card dh-summary-card');
+    const countTitle = el('h3','dh-block-title','📊 Items Overview');
+    const countStats = el('div', 'dh-stats-grid');
+    const addStat = (label, value, trend) => {
+      const stat = el('div', 'dh-stat-item');
+      stat.innerHTML = '<div class="dh-stat-label">'+label+'</div><div class="dh-stat-value '+(trend||'')+'">'+value+'</div>';
+      countStats.appendChild(stat);
+    };
+    addStat('Total Items', list.length);
+    addStat('Cheaper', cheaper.length, 'stat-positive');
+    addStat('Expensive', expensive.length, 'stat-negative');
+    addStat('Average Change', (avgDelta>0?'+':'')+avgDelta.toFixed(1)+'%', avgDelta > 0 ? 'stat-negative' : 'stat-positive');
+    countCard.append(countTitle, countStats);
+    
+    if(biggestUp || biggestDown) {
+      const impactCard = el('div','dh-card dh-summary-card');
+      const impactTitle = el('h3','dh-block-title','🎯 Key Highlights');
+      const impactList = el('ul', 'dh-impact-list');
+      
+      if(biggestDown) {
+        const li = el('li', 'dh-impact-item');
+        li.innerHTML = '<span class="impact-icon positive">📉</span><div><strong>Biggest Reduction:</strong><br>'+biggestDown.description+' <span class="stat-positive">('+Math.abs(biggestDown.change_pp)+'% lower)</span></div>';
+        impactList.appendChild(li);
+      }
+      
+      if(biggestUp) {
+        const li = el('li', 'dh-impact-item');
+        li.innerHTML = '<span class="impact-icon negative">📈</span><div><strong>Biggest Increase:</strong><br>'+biggestUp.description+' <span class="stat-negative">('+Math.abs(biggestUp.change_pp)+'% higher)</span></div>';
+        impactList.appendChild(li);
+      }
+      
+      impactCard.append(impactTitle, impactList);
+      wrapper.append(countCard, impactCard);
+    } else {
+      wrapper.appendChild(countCard);
+    }
+    
+    return wrapper;
+  }
+
+  function render(){
+    root.innerHTML='';
+    const filteredAll = itemsComputed.filter(i=> (state.trend==='all'||i.trend===state.trend) && (state.sector==='all'||i.sector===state.sector));
+    root.appendChild(buildSummaryCards(filteredAll));
+    const toolbar = buildToolbar();
+    root.appendChild(toolbar);
+
+    const bySector = filteredAll.reduce((a,it)=>{ (a[it.sector]||(a[it.sector]=[])).push(it); return a; }, {});
+    Object.keys(bySector).sort().forEach(sector=>{
+      const list = bySector[sector].slice().sort(defaultSort);
+      const card = el('div','dh-card');
+      const h = el('h3','dh-block-title', sector);
+      const ul = el('ul','dh-list'); list.forEach(it=> ul.appendChild(row(it)));
+      card.append(h,ul);
+      root.appendChild(card);
+    });
   }
 
   render();
