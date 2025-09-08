@@ -1083,6 +1083,21 @@ document.addEventListener("DOMContentLoaded", () => {
 <!-- Dynamic renderer: reads embedded GST JSON and builds the page; removes legacy lists on success. -->
 <script>
 (function(){
+  // Fallback: convert legacy "↓N pp" text to "N% lower/higher"
+  try {
+    document.querySelectorAll('.drop').forEach(el => {
+      const txt = (el.textContent||'').trim();
+      const m = txt.match(/[↑↓+-]\s*(\d+)/);
+      if(!m) return; const mag = parseInt(m[1], 10) || 0;
+      const isUp = /[↑+]/.test(txt);
+      el.className = 'delta ' + (isUp ? 'delta-up' : 'delta-down');
+      el.textContent = mag + '% ' + (isUp ? 'higher' : 'lower');
+    });
+  } catch(e) { /* ignore */ }
+})();
+</script>
+<script>
+(function(){
   const dataEl = document.getElementById('gst-data');
   const root = document.getElementById('gst-root');
   const widget = document.querySelector('.dh-gst-widget');
@@ -1114,8 +1129,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const li = document.createElement('li'); li.className = 'dh-row';
     const name = document.createElement('span'); name.className = 'dh-name'; name.textContent = it.description;
     const data = document.createElement('span'); data.className = 'dh-data';
-    const delta = (it.change_pp >= 0 ? '+' : '') + it.change_pp + ' pp';
-    data.innerHTML = `<span class="old">${it.from}%</span> → <span class="new">${it.to}%</span> <span class="drop">${delta}</span>`;
+    const dir = it.change_pp > 0 ? 'higher' : it.change_pp < 0 ? 'lower' : 'no change';
+    const label = it.change_pp === 0 ? 'No change' : `${Math.abs(it.change_pp)}% ${dir}`;
+    data.innerHTML = `<span class="old">${it.from}%</span> → <span class="new">${it.to}%</span> <span class="delta ${it.change_pp>0?'delta-up':it.change_pp<0?'delta-down':'delta-zero'}">${label}</span>`;
     li.append(name, data);
     return li;
   }
@@ -1196,8 +1212,10 @@ document.addEventListener("DOMContentLoaded", () => {
     const li = el('li','dh-row');
     const name = el('span','dh-name', it.description);
     const data = el('span','dh-data');
-    const delta = (it.change_pp >= 0 ? '+' : '') + it.change_pp + ' pp';
-    data.innerHTML = `<span class="old">${it.from}%</span> &rarr; <span class="new">${it.to}%</span> <span class="drop">${delta}</span>`;
+    const dir = it.change_pp > 0 ? 'higher' : it.change_pp < 0 ? 'lower' : 'no change';
+    const cls = it.change_pp>0?'delta-up':it.change_pp<0?'delta-down':'delta-zero';
+    const label = it.change_pp === 0 ? 'No change' : Math.abs(it.change_pp) + '% ' + dir;
+    data.innerHTML = `<span class="old">${it.from}%</span> &rarr; <span class="new">${it.to}%</span> <span class="delta ${cls}">${label}</span>`;
     li.append(name,data);
     return li;
   }
@@ -1235,7 +1253,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const search = el('input'); search.type='search'; search.placeholder='Search items'; search.value=state.q; search.style.marginRight='8px';
     const trend = el('select'); ['all','cheaper','expensive'].forEach(v=>{ const o=el('option',null,v); o.value=v; o.selected=(v===state.trend); trend.appendChild(o); }); trend.style.marginRight='8px';
     let sectorSel=null; if(hasSectors){ sectorSel = el('select'); sectorSel.style.marginRight='8px'; sectorSel.appendChild(new Option('all','all',false,state.sector==='all')); sectors.forEach(s=> sectorSel.appendChild(new Option(s,s,false,state.sector===s))); }
-    const sort = el('select'); [['change_desc','Δ pp (desc)'],['change_asc','Δ pp (asc)'],['to_desc','New % (desc)'],['to_asc','New % (asc)'],['from_desc','Old % (desc)'],['from_asc','Old % (asc)'],['az','A→Z'],['za','Z→A']].forEach(([val,label])=>{ const o=el('option',null,label); o.value=val; o.selected=(val===state.sort); sort.appendChild(o); });
+    const sort = el('select'); [['change_desc','Change (desc)'],['change_asc','Change (asc)'],['to_desc','New % (desc)'],['to_asc','New % (asc)'],['from_desc','Old % (desc)'],['from_asc','Old % (asc)'],['az','A→Z'],['za','Z→A']].forEach(([val,label])=>{ const o=el('option',null,label); o.value=val; o.selected=(val===state.sort); sort.appendChild(o); });
     let t; search.addEventListener('input',()=>{ clearTimeout(t); t=setTimeout(()=>{ state.q=search.value.trim(); writeState(); render(); },200); });
     trend.addEventListener('change',()=>{ state.trend=trend.value; writeState(); render(); });
     if(sectorSel) sectorSel.addEventListener('change',()=>{ state.sector=sectorSel.value; writeState(); render(); });
@@ -1309,12 +1327,10 @@ document.addEventListener("DOMContentLoaded", () => {
     const li = el('li','dh-row'); li.id = it.id;
     const name = el('span','dh-name', it.description);
     const data = el('span','dh-data');
-    const deltaText = (it.change_pp>=0?'+':'') + it.change_pp + ' pp';
-    let deltaClass = 'delta-zero'; let arrow = '';
-    if(it.change_pp>0){ deltaClass='delta-up'; arrow='▲'; }
-    else if(it.change_pp<0){ deltaClass='delta-down'; arrow='▼'; }
+    const cls = it.change_pp>0?'delta-up':it.change_pp<0?'delta-down':'delta-zero';
+    const label = it.change_pp === 0 ? 'No change' : Math.abs(it.change_pp) + '% ' + (it.change_pp>0?'higher':'lower');
     data.innerHTML = '<span class="old">'+it.from+'%</span> &rarr; <span class="new">'+it.to+'%</span> ' +
-      '<span class="delta '+deltaClass+'">'+arrow+' '+deltaText+'</span>';
+      '<span class="delta '+cls+'">'+label+'</span>';
     li.append(name,data); return li;
   }
 
@@ -1398,7 +1414,7 @@ document.addEventListener("DOMContentLoaded", () => {
     addStat('Total Items', list.length);
     addStat('Cheaper', cheaper.length, 'stat-positive');
     addStat('Expensive', expensive.length, 'stat-negative');
-    addStat('Average Change', (avgDelta>0?'+':'')+avgDelta.toFixed(1)+' pp', avgDelta > 0 ? 'stat-negative' : 'stat-positive');
+    addStat('Average Change', (avgDelta>0?'+':'')+avgDelta.toFixed(1)+'%', avgDelta > 0 ? 'stat-negative' : 'stat-positive');
     countCard.append(countTitle, countStats);
     
     // Impact highlights card (only show if there are items)
@@ -1409,13 +1425,13 @@ document.addEventListener("DOMContentLoaded", () => {
       
       if(biggestDown) {
         const li = el('li', 'dh-impact-item');
-        li.innerHTML = '<span class="impact-icon positive">📉</span><div><strong>Biggest Reduction:</strong><br>'+biggestDown.description+' <span class="stat-positive">('+biggestDown.change_pp+' pp)</span></div>';
+        li.innerHTML = '<span class="impact-icon positive">📉</span><div><strong>Biggest Reduction:</strong><br>'+biggestDown.description+' <span class="stat-positive">('+Math.abs(biggestDown.change_pp)+'% lower)</span></div>';
         impactList.appendChild(li);
       }
       
       if(biggestUp) {
         const li = el('li', 'dh-impact-item');
-        li.innerHTML = '<span class="impact-icon negative">📈</span><div><strong>Biggest Increase:</strong><br>'+biggestUp.description+' <span class="stat-negative">(+'+biggestUp.change_pp+' pp)</span></div>';
+        li.innerHTML = '<span class="impact-icon negative">📈</span><div><strong>Biggest Increase:</strong><br>'+biggestUp.description+' <span class="stat-negative">('+Math.abs(biggestUp.change_pp)+'% higher)</span></div>';
         impactList.appendChild(li);
       }
       
