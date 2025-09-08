@@ -1,0 +1,1145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Next-Gen GST Reform – Interactive Infographic (DH, JS-enhanced)</title>
+
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Roboto+Slab:wght@400;500;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --dh-blue:#0091AC;
+  --dh-blue-ink:#067991;
+  --border:#e6e6e6;
+  --ink:#1c1c1c;
+  --muted:#6b6b6b;
+  --bg-lite:#f7fafa;
+  --red:#c1121f;
+  --green:#2a9d8f;
+  --drop:#e85d04;
+  --radius:12px;
+  --shadow:0 4px 12px rgba(0,0,0,.08);
+  --shadow-hover:0 8px 24px rgba(0,0,0,.12);
+  --gradient-primary:linear-gradient(135deg, var(--dh-blue) 0%, var(--dh-blue-ink) 100%);
+  --border-interactive:#d1d5db;
+  --pulse: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Loading and entrance animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: .7;
+  }
+}
+
+.animate-fade-in {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+/* Staggered animation for cards */
+.dh-card:nth-child(1) { animation-delay: 0.1s; }
+.dh-card:nth-child(2) { animation-delay: 0.2s; }
+.dh-card:nth-child(3) { animation-delay: 0.3s; }
+.dh-card:nth-child(4) { animation-delay: 0.4s; }
+.dh-card:nth-child(5) { animation-delay: 0.5s; }
+.dh-card:nth-child(6) { animation-delay: 0.6s; }
+.dh-card:nth-child(7) { animation-delay: 0.7s; }
+.dh-card:nth-child(8) { animation-delay: 0.8s; }
+.dh-card:nth-child(9) { animation-delay: 0.9s; }
+
+/* Smooth focus states */
+*:focus-visible {
+  outline: 2px solid var(--dh-blue);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Hide horizontal scrollbars */
+.chip-row, .dh-toolbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.chip-row::-webkit-scrollbar, .dh-toolbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Toolbar layout components */
+.dh-toolbar-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
+}
+
+.dh-toolbar-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink);
+  margin: 0;
+}
+
+.dh-button-group {
+  display: flex;
+  gap: 4px;
+  background: var(--bg-lite);
+  padding: 2px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+}
+
+.dh-button-group .chip {
+  margin: 0;
+  padding: 6px 12px;
+  font-size: 13px;
+  border: none;
+  background: transparent;
+  color: var(--ink);
+  font-weight: 500;
+}
+
+.dh-button-group .chip.active {
+  background: #fff;
+  color: var(--dh-blue);
+  box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+  font-weight: 600;
+}
+
+.dh-toolbar select {
+  min-width: 120px;
+  font-size: 14px;
+  color: var(--ink);
+}
+
+/* Summary cards styling */
+.dh-summary-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-bottom: 24px;
+}
+
+.dh-summary-card {
+  margin-bottom: 0;
+}
+
+.dh-stats-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.dh-stat-item {
+  text-align: center;
+  padding: 12px;
+  background: rgba(247, 250, 250, 0.5);
+  border-radius: 8px;
+  border: 1px solid var(--border);
+}
+
+.dh-stat-label {
+  font-size: 12px;
+  color: var(--muted);
+  margin-bottom: 4px;
+  font-weight: 500;
+}
+
+.dh-stat-value {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.dh-stat-value.stat-positive {
+  color: var(--green);
+}
+
+.dh-stat-value.stat-negative {
+  color: var(--red);
+}
+
+.dh-impact-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.dh-impact-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.dh-impact-item:last-child {
+  border-bottom: none;
+}
+
+.impact-icon {
+  font-size: 20px;
+  flex-shrink: 0;
+}
+
+.impact-icon.positive {
+  color: var(--green);
+}
+
+.impact-icon.negative {
+  color: var(--red);
+}
+
+@media (max-width: 768px) {
+  .dh-summary-wrapper {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  
+  .dh-stats-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  
+  .dh-stat-value {
+    font-size: 18px;
+  }
+}
+*{box-sizing:border-box}
+body{margin:0;background:#fff;scroll-behavior:smooth;}
+.dh-gst-widget{
+  font-family:"Roboto Slab", serif;
+  color:var(--ink);
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  max-width:900px;
+  margin:20px auto;
+  padding:24px;
+  box-shadow:var(--shadow);
+  transition:all 0.3s ease;
+}
+.dh-gst-title{
+  margin:0 0 8px;
+  text-align:center;
+  font-size:32px;
+  line-height:1.2;
+  background:var(--gradient-primary);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  background-clip:text;
+  font-family:"Playfair Display", serif;
+  font-weight:700;
+}
+.dh-gst-kicker{
+  text-align:center;
+  color:var(--muted);
+  margin:0 0 2rem;
+  font-size:16px;
+  font-weight:500;
+  position:relative;
+}
+.dh-gst-kicker::after{
+  content:'';
+  display:block;
+  width:60px;
+  height:3px;
+  background:var(--gradient-primary);
+  margin:12px auto 0;
+  border-radius:2px;
+}
+.dh-card{
+  background:var(--bg-lite);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:20px;
+  margin-bottom:24px;
+  position:relative;
+  overflow:hidden;
+}
+.dh-card::before{
+  content:'';
+  position:absolute;
+  top:0;
+  left:0;
+  right:0;
+  height:4px;
+  background:var(--gradient-primary);
+  opacity:1;
+}
+.dh-block-title{
+  margin:0 0 16px;
+  color:var(--dh-blue-ink);
+  font-weight:700;
+  font-family:"Playfair Display", serif;
+  font-size:20px;
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+.dh-block-title::before{
+  content:'';
+  width:4px;
+  height:20px;
+  background:var(--gradient-primary);
+  border-radius:2px;
+}
+.dh-list{list-style:none;margin:0;padding:0;}
+.dh-row{
+  display:flex;
+  justify-content:space-between;
+  gap:16px;
+  align-items:center;
+  padding:16px 0;
+  border-bottom:1px solid var(--border);
+  border-radius:8px;
+  margin:0 -8px;
+}
+.dh-row:last-child{border-bottom:0;}
+.dh-name{flex:1;font-weight:500;}
+.dh-data{min-width:210px;text-align:right;white-space:nowrap;}
+.old{color:var(--red);font-weight:700;position:relative;}
+.new{color:var(--green);font-weight:700;position:relative;}
+.drop{background:var(--drop);color:#fff;border-radius:999px;padding:4px 12px;font-size:12px;margin-left:8px;font-weight:600;box-shadow:0 2px 4px rgba(232, 93, 4, 0.3);}
+.old::before, .new::before{
+  content:'';
+  position:absolute;
+  bottom:-2px;
+  left:0;
+  right:0;
+  height:2px;
+  border-radius:1px;
+  transition:all 0.2s ease;
+}
+.old::before{background:var(--red);}
+.new::before{background:var(--green);}
+/* Arrow delta styles */
+.delta{border-radius:999px;padding:6px 12px;font-size:12px;margin-left:8px;border:1px solid transparent;font-weight:700;box-shadow:0 2px 4px rgba(0,0,0,0.1);}
+.delta-up{color:var(--green);border-color:var(--green);background:rgba(42,157,143,.12);}
+.delta-down{color:var(--red);border-color:var(--red);background:rgba(193,18,31,.12);}
+.delta-zero{color:var(--muted);border-color:var(--border);background:#fff;}
+.kpi-up{color:var(--green);font-weight:700}
+.kpi-down{color:var(--red);font-weight:700}
+details{border:1px solid var(--border);border-radius:var(--radius);margin-bottom:16px;box-shadow:var(--shadow);overflow:hidden;}
+summary{
+  list-style:none;
+  cursor:pointer;
+  padding:16px 20px;
+  font-family:"Playfair Display", serif;
+  font-weight:700;
+  color:var(--dh-blue);
+  position:relative;
+  display:flex;
+  align-items:center;
+  gap:8px;
+  font-size:18px;
+}
+summary::marker{display:none;}
+summary::after{
+  content:"▾";
+  position:absolute;
+  right:20px;
+  transition:transform .3s ease;
+  font-size:16px;
+  width:24px;
+  height:24px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:50%;
+  background:rgba(0, 145, 172, 0.1);
+}
+details[open] summary{
+  background:var(--gradient-primary);
+  color:#fff;
+  box-shadow:inset 0 2px 4px rgba(0,0,0,0.1);
+}
+details[open] summary::after{
+  background:rgba(255,255,255,0.2);
+  color:#fff;
+}
+details[open] summary::after{transform:rotate(180deg);}
+.dh-panel-inner{padding:20px 24px;background:rgba(247, 250, 250, 0.5);}
+.dh-gst-footer{
+  margin-top:32px;
+  padding-top:20px;
+  border-top:2px solid var(--border);
+  font-size:14px;
+  color:var(--muted);
+  text-align:center;
+  position:relative;
+}
+.dh-gst-footer::before{
+  content:'📊';
+  font-size:20px;
+  position:absolute;
+  left:50%;
+  top:-12px;
+  transform:translateX(-50%);
+  background:#fff;
+  padding:0 8px;
+}
+/* Phase 3: sticky toolbar, chips, combobox */
+.dh-toolbar-card{position:sticky;top:0;z-index:30;background:#fff;border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);backdrop-filter:blur(8px);background:rgba(255,255,255,0.95);overflow:hidden;}
+.dh-toolbar-card.is-stuck{box-shadow:0 8px 32px rgba(0,0,0,.16);}
+.dh-toolbar{display:grid;grid-template-columns:1fr auto;gap:16px;align-items:center;padding:16px 20px;}
+.dh-toolbar input[type="search"], .dh-toolbar select{padding:10px 16px;border:1px solid var(--border-interactive);border-radius:8px;font-family:"Roboto Slab", serif;background:#fff;}
+.dh-toolbar input[type="search"]:focus, .dh-toolbar select:focus{outline:none;border-color:var(--dh-blue);box-shadow:0 0 0 3px rgba(0, 145, 172, 0.1);}
+.chip-row{display:flex;gap:8px;overflow:auto;padding:12px 20px 16px;scrollbar-width:none;-ms-overflow-style:none;background:rgba(247, 250, 250, 0.3);border-top:1px solid var(--border);}
+.chip-row::-webkit-scrollbar{display:none;}
+.chip{border:1px solid var(--border-interactive);border-radius:999px;padding:8px 16px;cursor:pointer;background:#fff;white-space:nowrap;font-weight:500;}
+.chip.active{background:var(--gradient-primary);border-color:var(--dh-blue);color:#fff;box-shadow:0 4px 12px rgba(0, 145, 172, 0.3);}
+/* Combobox */
+.combo{position:relative;min-width:280px;flex:1;}
+.combo-list{position:absolute;left:0;right:0;top:100%;background:#fff;border:1px solid var(--border-interactive);border-radius:var(--radius);box-shadow:var(--shadow-hover);max-height:320px;overflow:auto;display:none;margin-top:8px;z-index:100;}
+.combo-list.show{display:block}
+.combo-item{padding:12px 16px;cursor:pointer;border-radius:6px;margin:2px 4px;}
+.combo-item:first-child{margin-top:4px;}
+.combo-item:last-child{margin-bottom:4px;}
+.combo-item.hover{background:var(--dh-blue);color:#fff;}
+.flash{animation:flash 1.5s ease}
+@keyframes flash{0%{background:rgba(0, 145, 172, 0.2);transform:scale(1.02);}50%{background:rgba(0, 145, 172, 0.1);}100%{background:transparent;transform:scale(1);}}
+
+/* Mobile polish */
+@media (max-width: 768px){
+  .dh-toolbar{grid-template-columns:1fr;gap:12px;padding:16px;}
+  .dh-toolbar-controls{gap:12px;flex-wrap:wrap;}
+  .dh-toolbar-label{min-width:auto;}
+  .combo{min-width:200px;flex:1;}
+  .chip-row{padding:12px 16px;gap:6px;}
+  .chip{padding:8px 12px;font-size:13px;}
+  .dh-button-group .chip{padding:8px 12px;}
+}
+
+@media (max-width: 640px){
+  .dh-toolbar-card{top:env(safe-area-inset-top,0); border-radius:0; margin:0 -24px;}
+  .dh-toolbar{grid-template-columns:1fr; gap:12px; padding:12px;}
+  .dh-toolbar-controls{flex-direction:column;align-items:stretch;}
+  .combo{min-width:100%;}
+  .dh-toolbar input[type="search"], .dh-toolbar select{width:100%;}
+  .combo-list{max-height:50vh;}
+  .chip-row{gap:8px; padding:12px; margin:0 -12px;}
+  .chip{padding:12px 16px; font-size:14px; min-width:fit-content;}
+  .dh-gst-widget{margin:12px; padding:16px;}
+}
+@media (max-width: 640px){
+  .dh-gst-title{font-size:26px;}
+  .dh-gst-kicker{font-size:14px;}
+  .dh-row{flex-direction:column;align-items:center;text-align:center;padding:20px 12px;}
+  .dh-name,.dh-data{width:100%;text-align:center;}
+  .dh-data{min-width:auto; margin-top:8px;}
+  .dh-block-title{font-size:18px; justify-content:center;}
+  summary{font-size:16px; padding:14px 16px;}
+  .dh-card{padding:16px; margin-bottom:16px;}
+  .dh-panel-inner{padding:16px;}
+}
+</style>
+</head>
+<body>
+
+<div class="dh-gst-widget animate-fade-in">
+  <h2 class="dh-gst-title">Next-Gen GST Reform</h2>
+  <p class="dh-gst-kicker">Historic Diwali Gift • Better &amp; Simpler</p>
+
+
+  <div id="gst-root"></div>
+
+  <!-- Embedded GST dataset (self-contained). Replace array with your gst.json content. -->
+  <script id="gst-data" type="application/json">{
+  "🚜 Agriculture": [
+    {
+      "description": "Bio-Pesticides, Micro-Nutrients",
+      "from": 12,
+      "to": 5,
+      "change_pp": -7
+    },
+    {
+      "description": "Drip Irrigation & Sprinklers",
+      "from": 12,
+      "to": 5,
+      "change_pp": -7
+    }
+  ],
+  "👕 Apparel & Accessories": [
+    {
+      "description": "Apparel over Rs 2,500",
+      "from": 12,
+      "to": 18,
+      "change_pp": 6
+    },
+    {
+      "description": "Footwear less than Rs.2500 per pair",
+      "from": 12,
+      "to": 5,
+      "change_pp": -7
+    },
+    {
+      "description": "Handbags",
+      "from": 12,
+      "to": 5,
+      "change_pp": -7
+    },
+    {
+      "description": "Handmade/hand embroidered shawls",
+      "from": 12,
+      "to": 5,
+      "change_pp": -7
+    },
+    {
+      "description": "Umbrellas",
+      "from": 12,
+      "to": 5,
+      "change_pp": -7
+    }
+  ],
+  "🚗 Automotive": [
+    {
+      "description": "3-Wheelers",
+      "from": 28,
+      "to": 18,
+      "change_pp": -10
+    },
+    {
+      "description": "Ambulances",
+      "from": 28,
+      "to": 18,
+      "change_pp": -10
+    },
+    {
+      "description": "Bodies for the motor vehicles",
+      "from": 28,
+      "to": 18,
+      "change_pp": -10
+    },
+    {
+      "description": "Bumpers and parts thereof for tractors",
+      "from": 18,
+      "to": 5,
+      "change_pp": -13
+    },
+    {
+      "description": "Diesel cars of engine capacity not exceeding 1500 cc and of length not exceeding 4000 mm",
+      "from": 28,
+      "to": 18,
+      "change_pp": -10
+    },
+    {
+      "description": "Goods Transport Vehicles",
+      "from": 28,
+      "to": 18,
+      "change_pp": -10
+    },
+    {
+      "description": "Motor cars other",
+      "from": 28,
+      "to": 40,
+      "change_pp": 12
+    },
+    {
+      "description": "Motorcycles",
+      "from": 28,
+      "to": 18,
+      "change_pp": -10
+    },
+    {
+      "description": "Petrol cars of engine capacity not exceeding 1200cc and of length not exceeding 4000 mm",
+      "from": 28,
+      "to": 18,
+      "change_pp": -10
+    }
+  ],
+  "🍔 Food & Beverages": [
+    {
+      "description": "Aerated beverages containing sugar",
+      "from": 28,
+      "to": 40,
+      "change_pp": 12
+    },
+    {
+      "description": "All goods incl. refined sugar containing added flavouring or colouring matter, sugar cubes",
+      "from": 12,
+      "to": 5,
+      "change_pp": -7
+    },
+    {
+      "description": "Beverages containing milk",
+      "from": 12,
+      "to": 5,
+      "change_pp": -7
+    },
+    {
+      "description": "Butter, Ghee, Cheese",
+      "from": 12,
+      "to": 5,
+      "change_pp": -7
+    },
+    {
+      "description": "Chocolates and other food preparations",
+      "from": 18,
+      "to": 5,
+      "change_pp": -13
+    },
+    {
+      "description": "Coffee",
+      "from": 12,
+      "to": 5,
+      "change_pp": -7
+    },
+    {
+      "description": "Condensed milk",
+      "from": 12,
+      "to": 5,
+      "change_pp": -7
+    },
+    {
+      "description": "Confectionery",
+      "from": 18,
+      "to": 5,
+      "change_pp": -13
+    },
+    {
+      "description": "Dates",
+      "from": 12,
+      "to": 5,
+      "change_pp": -7
+    },
+    {
+      "description": "Diabetic foods",
+      "from": 12,
+      "to": 5,
+      "change_pp": -7
+    },
+    {
+      "description": "Fish and caviar, prepared and preserved",
+      "from": 12,
+      "to": 5,
+      "change_pp": -7
+    },
+    {
+      "description": "Ice cream",
+      "from": 18,
+      "to": 5,
+      "change_pp": -13
+    },
+    {
+      "description": "Jams and fruit jellies",
+      "from": 12,
+      "to": 5,
+      "change_pp": -7
+    },
+    {
+      "description": "Mustard, mayonnaise",
+      "from": 12,
+      "to": 5,
+      "change_pp": -7
+    },
+    {
+      "description": "Namkeens & Mixtures",
+      "from": 12,
+      "to": 5,
+      "change_pp": -7
+    },
+    {
+      "description": "Paneer of chenna",
+      "from": 5,
+      "to": 0,
+      "change_pp": -5
+    },
+    {
+      "description": "Paratha, parotta and other Indian breads by any name called",
+      "from": 18,
+      "to": 0,
+      "change_pp": -18
+    },
+    {
+      "description": "Pasta",
+      "from": 12,
+      "to": 5,
+      "change_pp": -7
+    },
+    {
+      "description": "Pastry, cakes, biscuits bread",
+      "from": 18,
+      "to": 5,
+      "change_pp": -13
+    },
+    {
+      "description": "Pizza bread",
+      "from": 5,
+      "to": 0,
+      "change_pp": -5
+    },
+    {
+      "description": "Plant-based milk",
+      "from": 18,
+      "to": 5,
+      "change_pp": -13
+    },
+    {
+      "description": "Shrimps and prawns, prepared and preserved",
+      "from": 12,
+      "to": 5,
+      "change_pp": -7
+    },
+    {
+      "description": "Soups and broth",
+      "from": 18,
+      "to": 5,
+      "change_pp": -13
+    },
+    {
+      "description": "Tender coconut water",
+      "from": 12,
+      "to": 5,
+      "change_pp": -7
+    },
+    {
+      "description": "Waters, including natural or artificial mineral waters and aerated waters",
+      "from": 18,
+      "to": 5,
+      "change_pp": -13
+    }
+  ],
+  "🏠 Household Goods": [
+    {
+      "description": "Agarbatti",
+      "from": 12,
+      "to": 18,
+      "change_pp": 6
+    },
+    {
+      "description": "Candles, tapers and the like",
+      "from": 12,
+      "to": 5,
+      "change_pp": -7
+    },
+    {
+      "description": "Monitors & Projectors",
+      "from": 28,
+      "to": 18,
+      "change_pp": -10
+    },
+    {
+      "description": "TVs above 32\"",
+      "from": 28,
+      "to": 18,
+      "change_pp": -10
+    },
+    {
+      "description": "Utensils",
+      "from": 12,
+      "to": 5,
+      "change_pp": -7
+    },
+    {
+      "description": "Wood, stone idols",
+      "from": 12,
+      "to": 5,
+      "change_pp": -7
+    }
+  ],
+  "💎 Luxury & Sin Goods": [
+    {
+      "description": "Bidis",
+      "from": 28,
+      "to": 18,
+      "change_pp": -10
+    },
+    {
+      "description": "Cigars and cigarettes",
+      "from": 28,
+      "to": 40,
+      "change_pp": 12
+    },
+    {
+      "description": "Pan masala",
+      "from": 28,
+      "to": 40,
+      "change_pp": 12
+    },
+    {
+      "description": "Revolvers and pistols",
+      "from": 28,
+      "to": 40,
+      "change_pp": 12
+    },
+    {
+      "description": "Smoking pipes",
+      "from": 28,
+      "to": 40,
+      "change_pp": 12
+    }
+  ],
+  "⚕️ Medical & Health": [
+    {
+      "description": "All diagnostic kits",
+      "from": 12,
+      "to": 5,
+      "change_pp": -7
+    },
+    {
+      "description": "Bandages, dressing",
+      "from": 12,
+      "to": 5,
+      "change_pp": -7
+    },
+    {
+      "description": "Frames and mountings for spectacles, goggles or the like, and parts thereof",
+      "from": 12,
+      "to": 5,
+      "change_pp": -7
+    },
+    {
+      "description": "Glucometer & Test Strips",
+      "from": 12,
+      "to": 5,
+      "change_pp": -7
+    },
+    {
+      "description": "Health & Life Insurance",
+      "from": 18,
+      "to": 0,
+      "change_pp": -18
+    },
+    {
+      "description": "Medical Oxygen",
+      "from": 12,
+      "to": 5,
+      "change_pp": -7
+    },
+    {
+      "description": "Retail medicines",
+      "from": 12,
+      "to": 5,
+      "change_pp": -7
+    },
+    {
+      "description": "Thermometer",
+      "from": 12,
+      "to": 5,
+      "change_pp": -7
+    }
+  ],
+  "✨ Miscellaneous": [
+    {
+      "description": "Bicycles and other cycles (including delivery tricycles), not motorized",
+      "from": 12,
+      "to": 5,
+      "change_pp": -7
+    },
+    {
+      "description": "Caffeinated beverages",
+      "from": 28,
+      "to": 40,
+      "change_pp": 12
+    },
+    {
+      "description": "Hybrids with engine capacity not exceeding 1200cc and of length not exceeding 4000 mm",
+      "from": 28,
+      "to": 18,
+      "change_pp": -10
+    },
+    {
+      "description": "Non-alcoholic beverages",
+      "from": 18,
+      "to": 40,
+      "change_pp": 22
+    }
+  ],
+  "🧼 Personal Care": [
+    {
+      "description": "Combs, hair pins",
+      "from": 12,
+      "to": 5,
+      "change_pp": -7
+    },
+    {
+      "description": "Dental floss, toothpaste",
+      "from": 18,
+      "to": 5,
+      "change_pp": -13
+    },
+    {
+      "description": "Feeding Bottles, Diapers",
+      "from": 12,
+      "to": 5,
+      "change_pp": -7
+    },
+    {
+      "description": "Hair Oil, Shampoo, Soap",
+      "from": 18,
+      "to": 5,
+      "change_pp": -13
+    },
+    {
+      "description": "Shaving cream, shaving lotion, aftershave lotion",
+      "from": 18,
+      "to": 5,
+      "change_pp": -13
+    },
+    {
+      "description": "Toilet Soap",
+      "from": 18,
+      "to": 5,
+      "change_pp": -13
+    },
+    {
+      "description": "Tooth powder",
+      "from": 12,
+      "to": 5,
+      "change_pp": -7
+    }
+  ],
+  "☀️ Renewable Energy": [
+    {
+      "description": "PV cells",
+      "from": 12,
+      "to": 5,
+      "change_pp": -7
+    },
+    {
+      "description": "Silicon wafers",
+      "from": 12,
+      "to": 5,
+      "change_pp": -7
+    },
+    {
+      "description": "Wind mills",
+      "from": 12,
+      "to": 5,
+      "change_pp": -7
+    }
+  ],
+  "✏️ Stationery & School Supplies": [
+    {
+      "description": "Erasers",
+      "from": 5,
+      "to": 0,
+      "change_pp": -5
+    },
+    {
+      "description": "Exercise book, graph book, & laboratory notebook and notebooks",
+      "from": 12,
+      "to": 0,
+      "change_pp": -12
+    },
+    {
+      "description": "Maps",
+      "from": 12,
+      "to": 0,
+      "change_pp": -12
+    },
+    {
+      "description": "Mathematical boxes, geometry boxes and colour boxes",
+      "from": 12,
+      "to": 5,
+      "change_pp": -7
+    },
+    {
+      "description": "Pencils, Crayons, Sharpeners",
+      "from": 12,
+      "to": 0,
+      "change_pp": -12
+    }
+  ]
+}</script>
+
+  <footer class="dh-gst-footer">
+    <span>Source: Government of India (CBIC)</span>
+  </footer>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const accordions = document.querySelectorAll("details");
+  const SCROLL_OFFSET = 100; // px
+
+  accordions.forEach(acc => {
+    acc.addEventListener("toggle", () => {
+      if (acc.open) {
+        // Close others
+        accordions.forEach(o => { if (o !== acc) o.removeAttribute("open"); });
+        // Scroll with offset so the summary sits a bit below the top edge
+        setTimeout(() => {
+          const rect = acc.getBoundingClientRect();
+          const y = rect.top + window.scrollY - SCROLL_OFFSET;
+          window.scrollTo({ top: y, behavior: "smooth" });
+        }, 150);
+      }
+    });
+  });
+});
+</script>
+
+<script>
+(function(){
+  const dataEl = document.getElementById('gst-data');
+  const root = document.getElementById('gst-root');
+  const widget = document.querySelector('.dh-gst-widget');
+  if(!dataEl || !root || !widget) return;
+  let items = [];
+  try {
+    items = JSON.parse(dataEl.textContent || '[]');
+  } catch(e){ console.error('Failed to parse embedded GST JSON', e); return; }
+  if(!Array.isArray(items)){
+    if(items && typeof items === 'object'){
+      items = Object.entries(items).flatMap(([sector, list]) => Array.isArray(list) ? list.map(it => Object.assign({ sector }, it)) : []);
+    } else { items = []; }
+  }
+  if(items.length === 0) return;
+    function openList(){ list.classList.add('show'); }
+    function closeList(){ list.classList.remove('show'); hoverIndex=-1; }
+    function renderList(q){
+      const qq = (q||'').toLowerCase();
+      visible = !qq ? [] : items.filter(i=> (i.description||'').toLowerCase().includes(qq)).slice(0,20);
+      list.innerHTML='';
+      visible.forEach((it,idx)=>{ const d=el('div','combo-item',it.description); d.onmouseenter=()=>{ setHover(idx); }; d.onclick=()=>select(idx); list.append(d); });
+      if(visible.length){ openList(); } else { closeList(); }
+    }
+    function setHover(i){ hoverIndex=i; Array.from(list.children).forEach((n,ix)=> n.classList.toggle('hover', ix===hoverIndex)); }
+    function select(i){ if(i<0||i>=visible.length) return; const it=visible[i]; closeList(); search.value=it.description; const target=document.getElementById(it.id); if(target){ target.classList.add('flash'); target.scrollIntoView({behavior:'smooth', block:'center'}); setTimeout(()=>target.classList.remove('flash'),1500); } }
+    search.addEventListener('input',()=>renderList(search.value));
+    search.addEventListener('keydown', (e)=>{ if(!list.classList.contains('show')) return; if(e.key==='ArrowDown'){ e.preventDefault(); setHover(Math.min(visible.length-1, hoverIndex+1)); } else if(e.key==='ArrowUp'){ e.preventDefault(); setHover(Math.max(0, hoverIndex-1)); } else if(e.key==='Enter'){ e.preventDefault(); select(hoverIndex===-1?0:hoverIndex); } else if(e.key==='Escape'){ closeList(); } });
+    document.addEventListener('click', (e)=>{ if(!combo.contains(e.target)) closeList(); });
+
+    // Trend filter buttons (compact group)
+    const trendGroup = el('div', 'dh-toolbar-controls');
+    const trendLabel = el('label', 'dh-toolbar-label', 'Filter:');
+    const trendButtons = el('div', 'dh-button-group');
+    ['all','cheaper','expensive'].forEach(v=>{
+      const btn = el('button','chip'+(state.trend===v?' active':''), v === 'all' ? 'All' : v.charAt(0).toUpperCase()+v.slice(1));
+      btn.onclick=()=>{ state.trend=v; writeState(); render(); };
+      trendButtons.append(btn);
+    });
+    trendGroup.append(trendLabel, trendButtons);
+
+    // Sort dropdown removed - using default sort by impact
+
+    // Category chips row
+    const chips = el('div','chip-row');
+    function renderChips(){
+      chips.innerHTML='';
+      const all = el('button','chip'+(state.sector==='all'?' active':''),'All Categories'); 
+      all.onclick=()=>{state.sector='all'; writeState(); render();}; 
+      chips.append(all);
+      sectors.forEach(s=>{ 
+        const b=el('button','chip'+(state.sector===s?' active':''),s); 
+        b.onclick=()=>{ state.sector=s; writeState(); render(); }; 
+        chips.append(b); 
+      });
+    }
+    renderChips();
+
+    wrap.append(combo, trendGroup);
+    card.append(wrap, chips);
+    return card;
+  }
+
+  function buildSummaryCards(list){
+    const cheaper = list.filter(i=>i.trend==='cheaper');
+    const expensive = list.filter(i=>i.trend==='expensive');
+    const biggestUp = [...expensive].sort((a,b)=> b.change_pp - a.change_pp)[0];
+    const biggestDown = [...cheaper].sort((a,b)=> Math.abs(b.change_pp) - Math.abs(a.change_pp))[0];
+    const avgDelta = list.length ? (list.reduce((s,i)=> s + i.change_pp, 0)/list.length) : 0;
+    
+    // Create main stats cards
+    const wrapper = el('div', 'dh-summary-wrapper');
+    
+    // Items count card
+    const countCard = el('div','dh-card dh-summary-card');
+    const countTitle = el('h3','dh-block-title','📊 Items Overview');
+    const countStats = el('div', 'dh-stats-grid');
+    const addStat = (label, value, trend) => {
+      const stat = el('div', 'dh-stat-item');
+      stat.innerHTML = '<div class="dh-stat-label">'+label+'</div><div class="dh-stat-value '+(trend||'')+'">'+value+'</div>';
+      countStats.appendChild(stat);
+    };
+    addStat('Total Items', list.length);
+    addStat('Cheaper', cheaper.length, 'stat-positive');
+    addStat('Expensive', expensive.length, 'stat-negative');
+    addStat('Average Change', (avgDelta>0?'+':'')+avgDelta.toFixed(1)+'%', avgDelta > 0 ? 'stat-negative' : 'stat-positive');
+    countCard.append(countTitle, countStats);
+    
+    // Impact highlights card (only show if there are items)
+    if(biggestUp || biggestDown) {
+      const impactCard = el('div','dh-card dh-summary-card');
+      const impactTitle = el('h3','dh-block-title','🎯 Key Highlights');
+      const impactList = el('ul', 'dh-impact-list');
+      
+      if(biggestDown) {
+        const li = el('li', 'dh-impact-item');
+        li.innerHTML = '<span class="impact-icon positive">📉</span><div><strong>Biggest Reduction:</strong><br>'+biggestDown.description+' <span class="stat-positive">('+Math.abs(biggestDown.change_pp)+'% lower)</span></div>';
+        impactList.appendChild(li);
+      }
+      
+      if(biggestUp) {
+        const li = el('li', 'dh-impact-item');
+        li.innerHTML = '<span class="impact-icon negative">📈</span><div><strong>Biggest Increase:</strong><br>'+biggestUp.description+' <span class="stat-negative">('+Math.abs(biggestUp.change_pp)+'% higher)</span></div>';
+        impactList.appendChild(li);
+      }
+      
+      impactCard.append(impactTitle, impactList);
+      wrapper.append(countCard, impactCard);
+    } else {
+      wrapper.appendChild(countCard);
+    }
+    
+    return wrapper;
+  }
+
+  function render(){
+    root.innerHTML='';
+    const filteredAll = items.filter(i=> (state.trend==='all'||i.trend===state.trend) && (state.sector==='all'||i.sector===state.sector));
+    // Summary cards
+    root.appendChild(buildSummaryCards(filteredAll));
+    // Sticky toolbar
+    const toolbar = buildToolbar();
+    root.appendChild(toolbar);
+    // Small spacer below toolbar so first category has breathing room
+    const spacer = document.createElement('div'); spacer.style.height = '6px'; root.appendChild(spacer);
+
+    // Sticky shadow when stuck
+    const sentinel = document.createElement('div'); sentinel.style.height='1px'; sentinel.setAttribute('aria-hidden','true');
+    toolbar.parentNode.insertBefore(sentinel, toolbar);
+    const io = new IntersectionObserver(entries => {
+      const e = entries[0];
+      toolbar.classList.toggle('is-stuck', e.intersectionRatio === 0);
+    });
+    io.observe(sentinel);
+
+    // Group by sector using filtered data
+    const bySector = filteredAll.reduce((a,it)=>{ (a[it.sector]||(a[it.sector]=[])).push(it); return a; }, {});
+    Object.keys(bySector).sort().forEach(sector=>{
+      const list = bySector[sector].slice().sort(defaultSort);
+      const card = el('div','dh-card');
+      const h = el('h3','dh-block-title', sector);
+      const ul = el('ul','dh-list'); list.forEach(it=> ul.appendChild(row(it)));
+      card.append(h,ul);
+      root.appendChild(card);
+    });
+
+    // remove any legacy sections to avoid duplicates
+    widget.querySelectorAll('details, section').forEach(n=>n.remove());
+  }
+
+  render();
+})();
+</script>
+
+</body>
+</html>
