@@ -132,40 +132,134 @@
 /* Summary cards styling */
 .dh-summary-wrapper {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 24px;
-  margin-bottom: 24px;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr;
+  gap: 12px;
+  margin-bottom: 16px;
 }
 
 .dh-summary-card {
   margin-bottom: 0;
 }
 
+.dh-highlight-card {
+  background: var(--bg-lite);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 12px;
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+  transition: none !important;
+}
+
+.dh-highlight-card:hover {
+  transform: none !important;
+  box-shadow: var(--shadow) !important;
+  background: var(--bg-lite) !important;
+  border-color: var(--border) !important;
+}
+
+.dh-highlight-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  border-radius: var(--radius) var(--radius) 0 0;
+}
+
+.dh-highlight-card.green::before {
+  background: var(--green);
+}
+
+.dh-highlight-card.red::before {
+  background: var(--red);
+}
+
+.dh-highlight-icon {
+  font-size: 24px;
+  margin-bottom: 6px;
+  display: block;
+}
+
+.dh-highlight-count {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 4px;
+  display: block;
+}
+
+.dh-highlight-count.positive {
+  color: var(--green);
+}
+
+.dh-highlight-count.negative {
+  color: var(--red);
+}
+
+.dh-highlight-label {
+  font-size: 11px;
+  color: var(--muted);
+  font-weight: 500;
+  margin-bottom: 0;
+  line-height: 1.2;
+}
+
+.dh-highlight-details {
+  text-align: left;
+}
+
+.dh-highlight-item {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 2px;
+  line-height: 1.2;
+}
+
+.dh-highlight-change {
+  font-size: 14px;
+  font-weight: 700;
+  margin-top: 4px;
+}
+
+.dh-highlight-change.positive {
+  color: var(--green);
+}
+
+.dh-highlight-change.negative {
+  color: var(--red);
+}
+
 .dh-stats-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 16px;
+  gap: 8px;
 }
 
 .dh-stat-item {
   text-align: center;
-  padding: 12px;
+  padding: 8px;
   background: rgba(247, 250, 250, 0.5);
-  border-radius: 8px;
+  border-radius: 6px;
   border: 1px solid var(--border);
 }
 
 .dh-stat-label {
-  font-size: 12px;
+  font-size: 10px;
   color: var(--muted);
-  margin-bottom: 4px;
+  margin-bottom: 2px;
   font-weight: 500;
+  line-height: 1.2;
 }
 
 .dh-stat-value {
-  font-size: 20px;
+  font-size: 16px;
   font-weight: 700;
   color: var(--ink);
+  line-height: 1.2;
 }
 
 .dh-stat-value.stat-positive {
@@ -185,8 +279,8 @@
 .dh-impact-item {
   display: flex;
   align-items: flex-start;
-  gap: 12px;
-  padding: 12px 0;
+  gap: 8px;
+  padding: 8px 0;
   border-bottom: 1px solid var(--border);
 }
 
@@ -209,17 +303,67 @@
 
 @media (max-width: 768px) {
   .dh-summary-wrapper {
-    grid-template-columns: 1fr;
-    gap: 16px;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 8px;
   }
   
   .dh-stats-grid {
     grid-template-columns: 1fr 1fr;
-    gap: 12px;
+    gap: 6px;
   }
   
   .dh-stat-value {
+    font-size: 14px;
+  }
+  
+  .dh-highlight-count {
     font-size: 18px;
+  }
+  
+  .dh-highlight-icon {
+    font-size: 20px;
+  }
+  
+  .dh-highlight-card {
+    padding: 10px;
+  }
+  
+  .dh-highlight-change {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .dh-summary-wrapper {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 6px;
+  }
+  
+  .dh-highlight-count {
+    font-size: 16px;
+  }
+  
+  .dh-highlight-icon {
+    font-size: 18px;
+    margin-bottom: 4px;
+  }
+  
+  .dh-highlight-card {
+    padding: 8px;
+  }
+  
+  .dh-highlight-label {
+    font-size: 10px;
+  }
+  
+  .dh-highlight-item {
+    font-size: 10px;
+  }
+  
+  .dh-highlight-change {
+    font-size: 11px;
   }
 }
 *{box-sizing:border-box}
@@ -231,16 +375,16 @@ body{margin:0;background:#fff;scroll-behavior:smooth;padding-bottom:100px;}
   border:1px solid var(--border);
   border-radius:var(--radius);
   max-width:900px;
-  margin:20px auto;
-  padding:24px;
+  margin:16px auto;
+  padding:20px;
   box-shadow:var(--shadow);
   transition:all 0.3s ease;
 }
 .dh-gst-title{
-  margin:0 0 8px;
+  margin:0 0 6px;
   text-align:center;
-  font-size:32px;
-  line-height:1.2;
+  font-size:28px;
+  line-height:1.1;
   background:var(--gradient-primary);
   -webkit-background-clip:text;
   -webkit-text-fill-color:transparent;
@@ -251,10 +395,11 @@ body{margin:0;background:#fff;scroll-behavior:smooth;padding-bottom:100px;}
 .dh-gst-kicker{
   text-align:center;
   color:var(--muted);
-  margin:0 0 2rem;
-  font-size:16px;
+  margin:0 0 1.5rem;
+  font-size:14px;
   font-weight:500;
   position:relative;
+  line-height:1.3;
 }
 .dh-gst-kicker::after{
   content:'';
@@ -269,8 +414,8 @@ body{margin:0;background:#fff;scroll-behavior:smooth;padding-bottom:100px;}
   background:var(--bg-lite);
   border:1px solid var(--border);
   border-radius:var(--radius);
-  padding:20px;
-  margin-bottom:24px;
+  padding:16px;
+  margin-bottom:16px;
   position:relative;
   overflow:hidden;
 }
@@ -285,14 +430,15 @@ body{margin:0;background:#fff;scroll-behavior:smooth;padding-bottom:100px;}
   opacity:1;
 }
 .dh-block-title{
-  margin:0 0 16px;
+  margin:0 0 12px;
   color:var(--dh-blue-ink);
   font-weight:700;
   font-family:"Playfair Display", serif;
-  font-size:20px;
+  font-size:18px;
   display:flex;
   align-items:center;
-  gap:8px;
+  gap:6px;
+  line-height:1.3;
 }
 .dh-block-title::before{
   content:'';
@@ -305,12 +451,12 @@ body{margin:0;background:#fff;scroll-behavior:smooth;padding-bottom:100px;}
 .dh-row{
   display:flex;
   justify-content:space-between;
-  gap:16px;
+  gap:12px;
   align-items:center;
-  padding:16px 0;
+  padding:12px 0;
   border-bottom:1px solid var(--border);
-  border-radius:8px;
-  margin:0 -8px;
+  border-radius:6px;
+  margin:0 -6px;
 }
 .dh-row:last-child{border-bottom:0;}
 .dh-name{flex:1;font-weight:500;}
@@ -377,10 +523,10 @@ details[open] summary::after{
 details[open] summary::after{transform:rotate(180deg);}
 .dh-panel-inner{padding:20px 24px;background:rgba(247, 250, 250, 0.5);}
 .dh-gst-footer{
-  margin-top:32px;
-  padding-top:20px;
+  margin-top:20px;
+  padding-top:16px;
   border-top:2px solid var(--border);
-  font-size:14px;
+  font-size:12px;
   color:var(--muted);
   text-align:center;
   position:relative;
@@ -398,12 +544,12 @@ details[open] summary::after{transform:rotate(180deg);}
 /* Phase 3: sticky toolbar, chips, combobox */
 .dh-toolbar-card{position:sticky;top:var(--dh-sticky-offset, 0px);z-index:30;background:#fff;border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);backdrop-filter:blur(8px);background:rgba(255,255,255,0.95);overflow:hidden;}
 .dh-toolbar-card.is-stuck{box-shadow:0 8px 32px rgba(0,0,0,.16);}
-.dh-toolbar{display:grid;grid-template-columns:1fr auto;gap:16px;align-items:center;padding:16px 20px;}
+.dh-toolbar{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center;padding:12px 16px;}
 .dh-toolbar input[type="search"], .dh-toolbar select{padding:10px 16px;border:1px solid var(--border-interactive);border-radius:8px;font-family:"Roboto Slab", serif;background:#fff;}
 .dh-toolbar input[type="search"]:focus, .dh-toolbar select:focus{outline:none;border-color:var(--dh-blue);box-shadow:0 0 0 3px rgba(0, 145, 172, 0.1);}
-.chip-row{display:flex;gap:8px;overflow:auto;padding:12px 20px 16px 28px;scrollbar-width:none;-ms-overflow-style:none;background:rgba(247, 250, 250, 0.3);border-top:1px solid var(--border);}
+.chip-row{display:flex;gap:6px;overflow:auto;padding:8px 16px 10px 20px;scrollbar-width:none;-ms-overflow-style:none;background:rgba(247, 250, 250, 0.3);border-top:1px solid var(--border);}
 .chip-row::-webkit-scrollbar{display:none;}
-.chip{border:1px solid var(--border-interactive);border-radius:999px;padding:8px 16px;cursor:pointer;background:#fff;white-space:nowrap;font-weight:500;display:flex;align-items:center;gap:6px;}
+.chip{border:1px solid var(--border-interactive);border-radius:999px;padding:6px 12px;cursor:pointer;background:#fff;white-space:nowrap;font-weight:500;display:flex;align-items:center;gap:4px;font-size:13px;}
 .chip.active{background:var(--gradient-primary);border-color:var(--dh-blue);color:#fff;box-shadow:0 4px 12px rgba(0, 145, 172, 0.3);}
 .chip-badge{display:inline-flex;align-items:center;justify-content:center;min-width:18px;height:18px;border-radius:50%;background:rgba(0, 145, 172, 0.1);color:var(--dh-blue);font-size:11px;font-weight:600;padding:2px 5px;margin-left:2px;}
 .chip.active .chip-badge{background:rgba(255, 255, 255, 0.2);color:#fff;}
@@ -443,15 +589,15 @@ details[open] summary::after{transform:rotate(180deg);}
   .dh-gst-widget{width:100%; max-width:none; margin:0; padding:12px; border-radius:0;}
 }
 @media (max-width: 640px){
-  .dh-gst-title{font-size:26px;}
-  .dh-gst-kicker{font-size:14px;}
-  .dh-row{flex-direction:column;align-items:center;text-align:center;padding:20px 12px;}
+  .dh-gst-title{font-size:24px;}
+  .dh-gst-kicker{font-size:13px;}
+  .dh-row{flex-direction:column;align-items:center;text-align:center;padding:16px 10px;}
   .dh-name,.dh-data{width:100%;text-align:center;}
-  .dh-data{min-width:auto; margin-top:8px;}
-  .dh-block-title{font-size:18px; justify-content:center;}
-  summary{font-size:16px; padding:14px 16px;}
-  .dh-card{padding:16px; margin-bottom:16px;}
-  .dh-panel-inner{padding:16px;}
+  .dh-data{min-width:auto; margin-top:6px;}
+  .dh-block-title{font-size:16px; justify-content:center;}
+  summary{font-size:15px; padding:12px 14px;}
+  .dh-card{padding:12px; margin-bottom:12px;}
+  .dh-panel-inner{padding:12px;}
 }
 /* Host sticky header offsets: mobile vs desktop */
 :root { --dh-sticky-offset: 44.39px; }
@@ -1257,20 +1403,22 @@ details[open] summary::after{transform:rotate(180deg);}
     function renderChips(){
       chips.innerHTML='';
       
-      // All Categories chip with total count
+      // All Categories chip with total count (always show)
       const allCount = countItemsForCategory('all');
       const all = el('button','chip'+(state.sector==='all'?' active':''));
       all.innerHTML = 'All Categories <span class="chip-badge">' + allCount + '</span>';
       all.onclick=()=>{state.sector='all'; writeState(); render();}; 
       chips.append(all);
       
-      // Individual sector chips with counts
+      // Individual sector chips with counts - only show if count > 0
       sectors.forEach(s=>{ 
         const count = countItemsForCategory(s);
-        const b=el('button','chip'+(state.sector===s?' active':'')); 
-        b.innerHTML = s + ' <span class="chip-badge">' + count + '</span>';
-        b.onclick=()=>{ state.sector=s; writeState(); render(); }; 
-        chips.append(b); 
+        if(count > 0) {  // Only show categories with items
+          const b=el('button','chip'+(state.sector===s?' active':'')); 
+          b.innerHTML = s + ' <span class="chip-badge">' + count + '</span>';
+          b.onclick=()=>{ state.sector=s; writeState(); render(); }; 
+          chips.append(b); 
+        }
       });
     }
     renderChips();
@@ -1286,44 +1434,64 @@ details[open] summary::after{transform:rotate(180deg);}
     const expensive = list.filter(i=>i.trend==='expensive');
     const biggestUp = [...expensive].sort((a,b)=> b.change_pp - a.change_pp)[0];
     const biggestDown = [...cheaper].sort((a,b)=> Math.abs(b.change_pp) - Math.abs(a.change_pp))[0];
-    const avgDelta = list.length ? (list.reduce((s,i)=> s + i.change_pp, 0)/list.length) : 0;
     
     const wrapper = el('div', 'dh-summary-wrapper');
-    const countCard = el('div','dh-card dh-summary-card');
-    const countTitle = el('h3','dh-block-title','📊 Items Overview');
-    const countStats = el('div', 'dh-stats-grid');
-    const addStat = (label, value, trend) => {
-      const stat = el('div', 'dh-stat-item');
-      stat.innerHTML = '<div class="dh-stat-label">'+label+'</div><div class="dh-stat-value '+(trend||'')+'">'+value+'</div>';
-      countStats.appendChild(stat);
-    };
-    addStat('Cheaper', cheaper.length, 'stat-positive');
-    addStat('Expensive', expensive.length, 'stat-negative');
-    countCard.append(countTitle, countStats);
     
-    if(biggestUp || biggestDown) {
-      const impactCard = el('div','dh-card dh-summary-card');
-      const impactTitle = el('h3','dh-block-title','🎯 Key Highlights');
-      const impactList = el('ul', 'dh-impact-list');
-      
-      if(biggestDown) {
-        const li = el('li', 'dh-impact-item');
-        li.innerHTML = '<span class="impact-icon positive">📉</span><div><strong>Biggest Reduction:</strong><br>'+biggestDown.description+' <span class="stat-positive">('+Math.abs(biggestDown.change_pp)+'% lower)</span></div>';
-        impactList.appendChild(li);
-      }
-      
-      if(biggestUp) {
-        const li = el('li', 'dh-impact-item');
-        li.innerHTML = '<span class="impact-icon negative">📈</span><div><strong>Biggest Increase:</strong><br>'+biggestUp.description+' <span class="stat-negative">('+Math.abs(biggestUp.change_pp)+'% higher)</span></div>';
-        impactList.appendChild(li);
-      }
-      
-      impactCard.append(impactTitle, impactList);
-      wrapper.append(countCard, impactCard);
+    // Card 1: Cheaper Items Count (Top Left)
+    const cheaperCard = el('div', 'dh-highlight-card green');
+    cheaperCard.innerHTML = `
+      <span class="dh-highlight-icon">📉</span>
+      <span class="dh-highlight-count positive">${cheaper.length}</span>
+      <p class="dh-highlight-label">Cheaper Items</p>
+    `;
+    
+    // Card 2: Expensive Items Count (Top Right)  
+    const expensiveCard = el('div', 'dh-highlight-card red');
+    expensiveCard.innerHTML = `
+      <span class="dh-highlight-icon">📈</span>
+      <span class="dh-highlight-count negative">${expensive.length}</span>
+      <p class="dh-highlight-label">Expensive Items</p>
+    `;
+    
+    // Card 3: Biggest Price Reduction (Bottom Left)
+    const reductionCard = el('div', 'dh-highlight-card green');
+    if(biggestDown) {
+      reductionCard.innerHTML = `
+        <span class="dh-highlight-icon">🎯</span>
+        <div class="dh-highlight-details">
+          <div class="dh-highlight-item">${biggestDown.description.length > 40 ? biggestDown.description.substring(0, 40) + '...' : biggestDown.description}</div>
+          <div class="dh-highlight-change positive">${Math.abs(biggestDown.change_pp)}% lower</div>
+        </div>
+        <p class="dh-highlight-label">Biggest Reduction</p>
+      `;
     } else {
-      wrapper.appendChild(countCard);
+      reductionCard.innerHTML = `
+        <span class="dh-highlight-icon">🎯</span>
+        <span class="dh-highlight-count">-</span>
+        <p class="dh-highlight-label">Biggest Reduction</p>
+      `;
     }
     
+    // Card 4: Biggest Price Increase (Bottom Right)
+    const increaseCard = el('div', 'dh-highlight-card red');
+    if(biggestUp) {
+      increaseCard.innerHTML = `
+        <span class="dh-highlight-icon">⚡</span>
+        <div class="dh-highlight-details">
+          <div class="dh-highlight-item">${biggestUp.description.length > 40 ? biggestUp.description.substring(0, 40) + '...' : biggestUp.description}</div>
+          <div class="dh-highlight-change negative">${Math.abs(biggestUp.change_pp)}% higher</div>
+        </div>
+        <p class="dh-highlight-label">Biggest Increase</p>
+      `;
+    } else {
+      increaseCard.innerHTML = `
+        <span class="dh-highlight-icon">⚡</span>
+        <span class="dh-highlight-count">-</span>
+        <p class="dh-highlight-label">Biggest Increase</p>
+      `;
+    }
+    
+    wrapper.append(cheaperCard, expensiveCard, reductionCard, increaseCard);
     return wrapper;
   }
 
