@@ -25,6 +25,8 @@
   --gradient-primary:linear-gradient(135deg, var(--dh-blue) 0%, var(--dh-blue-ink) 100%);
   --border-interactive:#d1d5db;
   --pulse: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  /* Host page can override to push toolbar below existing sticky header */
+  --dh-sticky-offset: 0px; /* default; overridden below */
 }
 
 /* Loading and entrance animations */
@@ -221,7 +223,7 @@
   }
 }
 *{box-sizing:border-box}
-body{margin:0;background:#fff;scroll-behavior:smooth;}
+body{margin:0;background:#fff;scroll-behavior:smooth;padding-bottom:100px;}
 .dh-gst-widget{
   font-family:"Roboto Slab", serif;
   color:var(--ink);
@@ -315,7 +317,6 @@ body{margin:0;background:#fff;scroll-behavior:smooth;}
 .dh-data{min-width:210px;text-align:right;white-space:nowrap;}
 .old{color:var(--red);font-weight:700;position:relative;}
 .new{color:var(--green);font-weight:700;position:relative;}
-.drop{background:var(--drop);color:#fff;border-radius:999px;padding:4px 12px;font-size:12px;margin-left:8px;font-weight:600;box-shadow:0 2px 4px rgba(232, 93, 4, 0.3);}
 .old::before, .new::before{
   content:'';
   position:absolute;
@@ -395,18 +396,18 @@ details[open] summary::after{transform:rotate(180deg);}
   padding:0 8px;
 }
 /* Phase 3: sticky toolbar, chips, combobox */
-.dh-toolbar-card{position:sticky;top:0;z-index:30;background:#fff;border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);backdrop-filter:blur(8px);background:rgba(255,255,255,0.95);overflow:hidden;}
+.dh-toolbar-card{position:sticky;top:var(--dh-sticky-offset, 0px);z-index:30;background:#fff;border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);backdrop-filter:blur(8px);background:rgba(255,255,255,0.95);overflow:hidden;}
 .dh-toolbar-card.is-stuck{box-shadow:0 8px 32px rgba(0,0,0,.16);}
 .dh-toolbar{display:grid;grid-template-columns:1fr auto;gap:16px;align-items:center;padding:16px 20px;}
 .dh-toolbar input[type="search"], .dh-toolbar select{padding:10px 16px;border:1px solid var(--border-interactive);border-radius:8px;font-family:"Roboto Slab", serif;background:#fff;}
 .dh-toolbar input[type="search"]:focus, .dh-toolbar select:focus{outline:none;border-color:var(--dh-blue);box-shadow:0 0 0 3px rgba(0, 145, 172, 0.1);}
-.chip-row{display:flex;gap:8px;overflow:auto;padding:12px 20px 16px;scrollbar-width:none;-ms-overflow-style:none;background:rgba(247, 250, 250, 0.3);border-top:1px solid var(--border);}
+.chip-row{display:flex;gap:8px;overflow:auto;padding:12px 20px 16px 28px;scrollbar-width:none;-ms-overflow-style:none;background:rgba(247, 250, 250, 0.3);border-top:1px solid var(--border);}
 .chip-row::-webkit-scrollbar{display:none;}
 .chip{border:1px solid var(--border-interactive);border-radius:999px;padding:8px 16px;cursor:pointer;background:#fff;white-space:nowrap;font-weight:500;}
 .chip.active{background:var(--gradient-primary);border-color:var(--dh-blue);color:#fff;box-shadow:0 4px 12px rgba(0, 145, 172, 0.3);}
 /* Combobox */
 .combo{position:relative;min-width:280px;flex:1;}
-.combo-list{position:absolute;left:0;right:0;top:100%;background:#fff;border:1px solid var(--border-interactive);border-radius:var(--radius);box-shadow:var(--shadow-hover);max-height:320px;overflow:auto;display:none;margin-top:8px;z-index:100;}
+.combo-list{position:absolute;left:0;right:0;top:100%;background:#fff;border:1px solid var(--border-interactive);border-radius:var(--radius);box-shadow:var(--shadow-hover);max-height:320px;overflow:auto;display:none;margin-top:8px;z-index:10000;}
 .combo-list.show{display:block}
 .combo-item{padding:12px 16px;cursor:pointer;border-radius:6px;margin:2px 4px;}
 .combo-item:first-child{margin-top:4px;}
@@ -421,21 +422,21 @@ details[open] summary::after{transform:rotate(180deg);}
   .dh-toolbar-controls{gap:12px;flex-wrap:wrap;}
   .dh-toolbar-label{min-width:auto;}
   .combo{min-width:200px;flex:1;}
-  .chip-row{padding:12px 16px;gap:6px;}
-  .chip{padding:8px 12px;font-size:13px;}
-  .dh-button-group .chip{padding:8px 12px;}
+  .chip-row{padding:12px 16px 12px 22px;gap:6px;}
+  .chip{padding:6px 10px;font-size:12px;}
+  .dh-button-group .chip{padding:6px 10px;}
 }
 
 @media (max-width: 640px){
-  .dh-toolbar-card{top:env(safe-area-inset-top,0); border-radius:0; margin:0 -24px;}
+  .dh-toolbar-card{top:calc(var(--dh-sticky-offset, 0px) + env(safe-area-inset-top,0)); border-radius:0; margin:0;}
   .dh-toolbar{grid-template-columns:1fr; gap:12px; padding:12px;}
   .dh-toolbar-controls{flex-direction:column;align-items:stretch;}
   .combo{min-width:100%;}
   .dh-toolbar input[type="search"], .dh-toolbar select{width:100%;}
   .combo-list{max-height:50vh;}
-  .chip-row{gap:8px; padding:12px; margin:0 -12px;}
-  .chip{padding:12px 16px; font-size:14px; min-width:fit-content;}
-  .dh-gst-widget{margin:12px; padding:16px;}
+  .chip-row{gap:4px; padding:8px 10px 8px 18px; margin:0 -12px;}
+  .chip{padding:4px 8px; font-size:11px; min-width:fit-content;}
+  .dh-gst-widget{width:100%; max-width:none; margin:0; padding:12px; border-radius:0;}
 }
 @media (max-width: 640px){
   .dh-gst-title{font-size:26px;}
@@ -448,6 +449,11 @@ details[open] summary::after{transform:rotate(180deg);}
   .dh-card{padding:16px; margin-bottom:16px;}
   .dh-panel-inner{padding:16px;}
 }
+/* Host sticky header offsets: mobile vs desktop */
+:root { --dh-sticky-offset: 44.39px; }
+@media (min-width: 768px){
+  .dh-gst-widget{ --dh-sticky-offset: 80px; }
+}
 </style>
 </head>
 <body>
@@ -456,100 +462,13 @@ details[open] summary::after{transform:rotate(180deg);}
   <h2 class="dh-gst-title">Next-Gen GST Reform</h2>
   <p class="dh-gst-kicker">Historic Diwali Gift • Better &amp; Simpler</p>
 
-  <!-- Highlights -->
-  <section class="dh-card" aria-label="Most impactful changes">
-    <h3 class="dh-block-title">Most Impactful Changes</h3>
-    <ul class="dh-list">
-      <li class="dh-row"><span class="dh-name">🛡️ Health &amp; Life Insurance</span><span class="dh-data"><span class="old">18%</span> → <span class="new">0%</span> <span class="drop">↓18 pp</span></span></li>
-      <li class="dh-row"><span class="dh-name">🚜 Tractor Tyres &amp; Parts</span><span class="dh-data"><span class="old">18%</span> → <span class="new">5%</span> <span class="drop">↓13 pp</span></span></li>
-      <li class="dh-row"><span class="dh-name">👓 Corrective Spectacles</span><span class="dh-data"><span class="old">12%</span> → <span class="new">5%</span> <span class="drop">↓7 pp</span></span></li>
-      <li class="dh-row"><span class="dh-name">🍿 Namkeens &amp; Mixtures</span><span class="dh-data"><span class="old">12%</span> → <span class="new">5%</span> <span class="drop">↓7 pp</span></span></li>
-    </ul>
-  </section>
-
-  <!-- Essentials -->
-  <details open>
-    <summary>🏠 Daily Essentials</summary>
-    <div class="dh-panel-inner">
-      <ul class="dh-list">
-        <li class="dh-row"><span class="dh-name">🧴 Hair Oil, Shampoo, Soap</span><span class="dh-data"><span class="old">18%</span> → <span class="new">5%</span> <span class="drop">↓13 pp</span></span></li>
-        <li class="dh-row"><span class="dh-name">🧈 Butter, Ghee, Cheese</span><span class="dh-data"><span class="old">12%</span> → <span class="new">5%</span> <span class="drop">↓7 pp</span></span></li>
-        <li class="dh-row"><span class="dh-name">🍿 Namkeens &amp; Mixtures</span><span class="dh-data"><span class="old">12%</span> → <span class="new">5%</span> <span class="drop">↓7 pp</span></span></li>
-        <li class="dh-row"><span class="dh-name">🍲 Utensils</span><span class="dh-data"><span class="old">12%</span> → <span class="new">5%</span> <span class="drop">↓7 pp</span></span></li>
-        <li class="dh-row"><span class="dh-name">🍼 Feeding Bottles, Diapers</span><span class="dh-data"><span class="old">12%</span> → <span class="new">5%</span> <span class="drop">↓7 pp</span></span></li>
-        <li class="dh-row"><span class="dh-name">🧵 Sewing Machines</span><span class="dh-data"><span class="old">12%</span> → <span class="new">5%</span> <span class="drop">↓7 pp</span></span></li>
-      </ul>
+  <noscript>
+    <div class="dh-card">
+      <h3 class="dh-block-title">Interactive View Requires JavaScript</h3>
+      <p>Please enable JavaScript to explore categories, filters, and changes.</p>
     </div>
-  </details>
+  </noscript>
 
-  <!-- Healthcare -->
-  <details>
-    <summary>💊 Healthcare Relief</summary>
-    <div class="dh-panel-inner">
-      <ul class="dh-list">
-        <li class="dh-row"><span class="dh-name">🛡️ Health &amp; Life Insurance</span><span class="dh-data"><span class="old">18%</span> → <span class="new">0%</span> <span class="drop">↓18 pp</span></span></li>
-        <li class="dh-row"><span class="dh-name">🌡️ Thermometer</span><span class="dh-data"><span class="old">12%</span> → <span class="new">5%</span> <span class="drop">↓7 pp</span></span></li>
-        <li class="dh-row"><span class="dh-name">💨 Medical Oxygen</span><span class="dh-data"><span class="old">12%</span> → <span class="new">5%</span> <span class="drop">↓7 pp</span></span></li>
-        <li class="dh-row"><span class="dh-name">🧪 Diagnostic Kits</span><span class="dh-data"><span class="old">12%</span> → <span class="new">5%</span> <span class="drop">↓7 pp</span></span></li>
-        <li class="dh-row"><span class="dh-name">📊 Glucometer &amp; Test Strips</span><span class="dh-data"><span class="old">12%</span> → <span class="new">5%</span> <span class="drop">↓7 pp</span></span></li>
-        <li class="dh-row"><span class="dh-name">👓 Corrective Spectacles</span><span class="dh-data"><span class="old">12%</span> → <span class="new">5%</span> <span class="drop">↓7 pp</span></span></li>
-      </ul>
-    </div>
-  </details>
-
-  <!-- Agriculture -->
-  <details>
-    <summary>🚜 Farmers &amp; Agriculture</summary>
-    <div class="dh-panel-inner">
-      <ul class="dh-list">
-        <li class="dh-row"><span class="dh-name">🚜 Tractor Tyres &amp; Parts</span><span class="dh-data"><span class="old">18%</span> → <span class="new">5%</span> <span class="drop">↓13 pp</span></span></li>
-        <li class="dh-row"><span class="dh-name">🚜 Tractors</span><span class="dh-data"><span class="old">12%</span> → <span class="new">5%</span> <span class="drop">↓7 pp</span></span></li>
-        <li class="dh-row"><span class="dh-name">🌱 Bio-Pesticides, Micro-Nutrients</span><span class="dh-data"><span class="old">12%</span> → <span class="new">5%</span> <span class="drop">↓7 pp</span></span></li>
-        <li class="dh-row"><span class="dh-name">💧 Drip Irrigation &amp; Sprinklers</span><span class="dh-data"><span class="old">12%</span> → <span class="new">5%</span> <span class="drop">↓7 pp</span></span></li>
-        <li class="dh-row"><span class="dh-name">🌾 Harvesting Machines</span><span class="dh-data"><span class="old">12%</span> → <span class="new">5%</span> <span class="drop">↓7 pp</span></span></li>
-      </ul>
-    </div>
-  </details>
-
-  <!-- Education -->
-  <details>
-    <summary>📚 Education</summary>
-    <div class="dh-panel-inner">
-      <ul class="dh-list">
-        <li class="dh-row"><span class="dh-name">🗺️ Maps, Charts, Globes</span><span class="dh-data"><span class="old">12%</span> → <span class="new">0%</span> <span class="drop">↓12 pp</span></span></li>
-        <li class="dh-row"><span class="dh-name">✏️ Pencils, Crayons, Sharpeners</span><span class="dh-data"><span class="old">12%</span> → <span class="new">0%</span> <span class="drop">↓12 pp</span></span></li>
-        <li class="dh-row"><span class="dh-name">📓 Notebooks &amp; Exercise Books</span><span class="dh-data"><span class="old">12%</span> → <span class="new">0%</span> <span class="drop">↓12 pp</span></span></li>
-        <li class="dh-row"><span class="dh-name">🩶 Erasers</span><span class="dh-data"><span class="old">5%</span> → <span class="new">0%</span> <span class="drop">↓5 pp</span></span></li>
-      </ul>
-    </div>
-  </details>
-
-  <!-- Vehicles -->
-  <details>
-    <summary>🚗 Vehicles Made Affordable</summary>
-    <div class="dh-panel-inner">
-      <ul class="dh-list">
-        <li class="dh-row"><span class="dh-name">🚗 Petrol/LPG/CNG Cars (≤1200cc)</span><span class="dh-data"><span class="old">28%</span> → <span class="new">18%</span> <span class="drop">↓10 pp</span></span></li>
-        <li class="dh-row"><span class="dh-name">🚙 Diesel Hybrid Cars (≤1500cc)</span><span class="dh-data"><span class="old">28%</span> → <span class="new">18%</span> <span class="drop">↓10 pp</span></span></li>
-        <li class="dh-row"><span class="dh-name">🛺 3-Wheelers</span><span class="dh-data"><span class="old">28%</span> → <span class="new">18%</span> <span class="drop">↓10 pp</span></span></li>
-        <li class="dh-row"><span class="dh-name">🏍️ Motorcycles (≤350cc)</span><span class="dh-data"><span class="old">28%</span> → <span class="new">18%</span> <span class="drop">↓10 pp</span></span></li>
-        <li class="dh-row"><span class="dh-name">🚚 Goods Transport Vehicles</span><span class="dh-data"><span class="old">28%</span> → <span class="new">18%</span> <span class="drop">↓10 pp</span></span></li>
-      </ul>
-    </div>
-  </details>
-
-  <!-- Electronics -->
-  <details>
-    <summary>📺 Electronics</summary>
-    <div class="dh-panel-inner">
-      <ul class="dh-list">
-        <li class="dh-row"><span class="dh-name">❄️ Air Conditioners</span><span class="dh-data"><span class="old">28%</span> → <span class="new">18%</span> <span class="drop">↓10 pp</span></span></li>
-        <li class="dh-row"><span class="dh-name">📺 TVs above 32&quot;</span><span class="dh-data"><span class="old">28%</span> → <span class="new">18%</span> <span class="drop">↓10 pp</span></span></li>
-        <li class="dh-row"><span class="dh-name">🖥️ Monitors &amp; Projectors</span><span class="dh-data"><span class="old">28%</span> → <span class="new">18%</span> <span class="drop">↓10 pp</span></span></li>
-        <li class="dh-row"><span class="dh-name">🍽️ Dish Washing Machines</span><span class="dh-data"><span class="old">28%</span> → <span class="new">18%</span> <span class="drop">↓10 pp</span></span></li>
-      </ul>
-    </div>
-  </details>
 
   <div id="gst-root"></div>
 
@@ -1052,51 +971,7 @@ details[open] summary::after{transform:rotate(180deg);}
     }
   ]
 }</script>
-
-  <footer class="dh-gst-footer">
-    <span>Source: Government of India (CBIC)</span>
-  </footer>
-</div>
-
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-  const accordions = document.querySelectorAll("details");
-  const SCROLL_OFFSET = 100; // px
-
-  accordions.forEach(acc => {
-    acc.addEventListener("toggle", () => {
-      if (acc.open) {
-        // Close others
-        accordions.forEach(o => { if (o !== acc) o.removeAttribute("open"); });
-        // Scroll with offset so the summary sits a bit below the top edge
-        setTimeout(() => {
-          const rect = acc.getBoundingClientRect();
-          const y = rect.top + window.scrollY - SCROLL_OFFSET;
-          window.scrollTo({ top: y, behavior: "smooth" });
-        }, 150);
-      }
-    });
-  });
-});
-</script>
-
-<!-- Dynamic renderer: reads embedded GST JSON and builds the page; removes legacy lists on success. -->
-<script>
-(function(){
-  // Fallback: convert legacy "↓N pp" text to "N% lower/higher"
-  try {
-    document.querySelectorAll('.drop').forEach(el => {
-      const txt = (el.textContent||'').trim();
-      const m = txt.match(/[↑↓+-]\s*(\d+)/);
-      if(!m) return; const mag = parseInt(m[1], 10) || 0;
-      const isUp = /[↑+]/.test(txt);
-      el.className = 'delta ' + (isUp ? 'delta-up' : 'delta-down');
-      el.textContent = mag + '% ' + (isUp ? 'higher' : 'lower');
-    });
-  } catch(e) { /* ignore */ }
-})();
-</script>
-<script>
+<script type="text/plain" data-disabled="true">
 (function(){
   const dataEl = document.getElementById('gst-data');
   const root = document.getElementById('gst-root');
@@ -1112,238 +987,6 @@ document.addEventListener("DOMContentLoaded", () => {
     } else { items = []; }
   }
   if(items.length === 0) return;
-
-  function compute(it){
-    const from = Number(it.from);
-    const to = Number(it.to);
-    const change = Number.isFinite(it.change_pp) ? Number(it.change_pp) : (to - from);
-    const trend = it.trend ? String(it.trend) : (change > 0 ? 'expensive' : change < 0 ? 'cheaper' : 'no_change');
-    return Object.assign({}, it, { from, to, change_pp: change, trend });
-  }
-  items = items.map(compute);
-
-  const groups = { cheaper: [], expensive: [], no_change: [] };
-  items.forEach(i => { (groups[i.trend] || groups.no_change).push(i); });
-
-  function row(it){
-    const li = document.createElement('li'); li.className = 'dh-row';
-    const name = document.createElement('span'); name.className = 'dh-name'; name.textContent = it.description;
-    const data = document.createElement('span'); data.className = 'dh-data';
-    const dir = it.change_pp > 0 ? 'higher' : it.change_pp < 0 ? 'lower' : 'no change';
-    const label = it.change_pp === 0 ? 'No change' : `${Math.abs(it.change_pp)}% ${dir}`;
-    data.innerHTML = `<span class="old">${it.from}%</span> → <span class="new">${it.to}%</span> <span class="delta ${it.change_pp>0?'delta-up':it.change_pp<0?'delta-down':'delta-zero'}">${label}</span>`;
-    li.append(name, data);
-    return li;
-  }
-
-  function card(title, arr){
-    if(!arr || arr.length === 0) return null;
-    const wrap = document.createElement('div'); wrap.className = 'dh-card';
-    const h = document.createElement('h3'); h.className = 'dh-block-title'; h.textContent = title;
-    const ul = document.createElement('ul'); ul.className = 'dh-list';
-    arr.slice().sort((a,b)=>Math.abs(b.change_pp) - Math.abs(a.change_pp)).forEach(i=>ul.appendChild(row(i)));
-    wrap.append(h, ul);
-    return wrap;
-  }
-
-  const summary = document.createElement('div'); summary.className = 'dh-card';
-  const sh = document.createElement('h3'); sh.className = 'dh-block-title'; sh.textContent = 'GST Changes Summary';
-  const p = document.createElement('p'); p.textContent = `Cheaper: ${groups.cheaper.length} • Expensive: ${groups.expensive.length}`;
-  summary.append(sh, p);
-  root.append(summary);
-
-  const cheaperCard = card('Cheaper', groups.cheaper);
-  const expensiveCard = card('Expensive', groups.expensive);
-  if (cheaperCard) root.appendChild(cheaperCard);
-  if (expensiveCard) root.appendChild(expensiveCard);
-
-  // Remove legacy static content after successful render
-  widget.querySelectorAll('details, section').forEach(n => n.remove());
-})();
-</script>
-
-<!-- Enhanced renderer with filters and sorting using embedded JSON -->
-<script>
-(function(){
-  const dataEl = document.getElementById('gst-data');
-  const root = document.getElementById('gst-root');
-  const widget = document.querySelector('.dh-gst-widget');
-  if(!dataEl || !root || !widget) return;
-  let items = [];
-  try { items = JSON.parse(dataEl.textContent || '[]'); } catch(e){ return; }
-  // Accept either a flat array or a grouped object { sector: [items] }
-  if(!Array.isArray(items)){
-    if(items && typeof items === 'object'){
-      items = Object.entries(items)
-        .flatMap(([sector, list]) => Array.isArray(list) ? list.map(it => Object.assign({ sector }, it)) : []);
-    } else { items = []; }
-  }
-  if(items.length === 0) return;
-
-  function compute(it){
-    const from = Number(it.from);
-    const to = Number(it.to);
-    const change = Number.isFinite(it.change_pp) ? Number(it.change_pp) : (to - from);
-    const trend = it.trend ? String(it.trend) : (change > 0 ? 'expensive' : change < 0 ? 'cheaper' : 'no_change');
-    return Object.assign({}, it, { from, to, change_pp: change, trend });
-  }
-  items = items.map(compute);
-
-  const hasSectors = items.some(i => i.sector);
-  const sectors = Array.from(new Set(items.map(i => i.sector).filter(Boolean))).sort();
-  const qs = new URLSearchParams(location.search);
-  const state = {
-    q: (qs.get('q') || '').trim(),
-    trend: qs.get('trend') || 'all',
-    sector: qs.get('sector') || 'all'
-  };
-  function writeState(){
-    const next = new URL(location.href);
-    const p = new URLSearchParams();
-    if(state.q) p.set('q', state.q);
-    if(state.trend && state.trend !== 'all') p.set('trend', state.trend);
-    if(hasSectors && state.sector && state.sector !== 'all') p.set('sector', state.sector);
-    next.search = p.toString();
-    history.replaceState(null, '', next);
-  }
-
-  function el(tag, cls, text){ const n=document.createElement(tag); if(cls) n.className=cls; if(text!=null) n.textContent=text; return n; }
-  function row(it){
-    const li = el('li','dh-row');
-    const name = el('span','dh-name', it.description);
-    const data = el('span','dh-data');
-    const dir = it.change_pp > 0 ? 'higher' : it.change_pp < 0 ? 'lower' : 'no change';
-    const cls = it.change_pp>0?'delta-up':it.change_pp<0?'delta-down':'delta-zero';
-    const label = it.change_pp === 0 ? 'No change' : Math.abs(it.change_pp) + '% ' + dir;
-    data.innerHTML = `<span class="old">${it.from}%</span> &rarr; <span class="new">${it.to}%</span> <span class="delta ${cls}">${label}</span>`;
-    li.append(name,data);
-    return li;
-  }
-  function filterItems(){
-    const q = state.q.toLowerCase();
-    return items.filter(i=>{
-      if(state.trend !== 'all' && i.trend !== state.trend) return false;
-      if(hasSectors && state.sector !== 'all' && (i.sector||'') !== state.sector) return false;
-      if(q && !(i.description||'').toLowerCase().includes(q)) return false;
-      return true;
-    });
-  }
-  const cmp = {
-    change_desc:(a,b)=> Math.abs(b.change_pp) - Math.abs(a.change_pp),
-    change_asc:(a,b)=> Math.abs(a.change_pp) - Math.abs(b.change_pp),
-    to_desc:(a,b)=> b.to - a.to,
-    to_asc:(a,b)=> a.to - b.to,
-    from_desc:(a,b)=> b.from - a.from,
-    from_asc:(a,b)=> a.from - b.from,
-    az:(a,b)=> (a.description||'').localeCompare(b.description||''),
-    za:(a,b)=> (b.description||'').localeCompare(a.description||'')
-  };
-  function card(title, arr){
-    if(!arr || arr.length===0) return null;
-    const wrap = el('div','dh-card');
-    const h = el('h3','dh-block-title', title);
-    const ul = el('ul','dh-list');
-    arr.slice().sort(cmp[state.sort]||cmp.change_desc).forEach(i=>ul.appendChild(row(i)));
-    wrap.append(h,ul); return wrap;
-  }
-  function buildToolbar(){
-    const card = el('div','dh-card');
-    const h = el('h3','dh-block-title','Filters & Sorting');
-    const wrap = el('div');
-    const search = el('input'); search.type='search'; search.placeholder='Search items'; search.value=state.q; search.style.marginRight='8px';
-    const trend = el('select'); ['all','cheaper','expensive'].forEach(v=>{ const o=el('option',null,v); o.value=v; o.selected=(v===state.trend); trend.appendChild(o); }); trend.style.marginRight='8px';
-    let sectorSel=null; if(hasSectors){ sectorSel = el('select'); sectorSel.style.marginRight='8px'; sectorSel.appendChild(new Option('all','all',false,state.sector==='all')); sectors.forEach(s=> sectorSel.appendChild(new Option(s,s,false,state.sector===s))); }
-    const sort = el('select'); [['change_desc','Change (desc)'],['change_asc','Change (asc)'],['to_desc','New % (desc)'],['to_asc','New % (asc)'],['from_desc','Old % (desc)'],['from_asc','Old % (asc)'],['az','A→Z'],['za','Z→A']].forEach(([val,label])=>{ const o=el('option',null,label); o.value=val; o.selected=(val===state.sort); sort.appendChild(o); });
-    let t; search.addEventListener('input',()=>{ clearTimeout(t); t=setTimeout(()=>{ state.q=search.value.trim(); writeState(); render(); },200); });
-    trend.addEventListener('change',()=>{ state.trend=trend.value; writeState(); render(); });
-    if(sectorSel) sectorSel.addEventListener('change',()=>{ state.sector=sectorSel.value; writeState(); render(); });
-    sort.addEventListener('change',()=>{ state.sort=sort.value; writeState(); render(); });
-    wrap.append(search,trend); if(sectorSel) wrap.append(sectorSel); wrap.append(sort);
-    card.append(h,wrap); return card;
-  }
-  function buildSummary(list){
-    const s=el('div','dh-card'); const h=el('h3','dh-block-title','GST Changes Summary');
-    const cheaper = list.filter(i=>i.trend==='cheaper').length; const expensive=list.filter(i=>i.trend==='expensive').length;
-    const p=el('p',null,`Cheaper: ${cheaper} • Expensive: ${expensive}`); s.append(h,p); return s;
-  }
-  function render(){
-    root.innerHTML=''; const filtered = filterItems(); root.appendChild(buildSummary(filtered)); root.appendChild(buildToolbar());
-    const byTrend = filtered.reduce((acc,it)=>{ (acc[it.trend]||(acc[it.trend]=[])).push(it); return acc; },{});
-    if(state.trend==='cheaper' || state.trend==='all'){ const c=card('Cheaper', byTrend.cheaper||[]); if(c) root.appendChild(c); }
-    if(state.trend==='expensive' || state.trend==='all'){ const c=card('Expensive', byTrend.expensive||[]); if(c) root.appendChild(c); }
-  }
-  render();
-  // Remove legacy static content after enhanced render
-  widget.querySelectorAll('details, section').forEach(n=>n.remove());
-})();
-</script>
-
-<!-- removed older renderer -->
-
-<script>
-(function(){
-  // Category-first renderer with sticky toolbar and dropdown search
-  const dataEl = document.getElementById('gst-data');
-  const root = document.getElementById('gst-root');
-  const widget = document.querySelector('.dh-gst-widget');
-  if(!dataEl || !root || !widget) return;
-  let data = [];
-  try{ data = JSON.parse(dataEl.textContent||'[]'); }catch(e){ console.warn('Bad JSON'); return; }
-  if(!Array.isArray(data)){
-    if(data && typeof data === 'object'){
-      data = Object.entries(data).flatMap(([sector,list]) => Array.isArray(list) ? list.map(it => Object.assign({sector}, it)) : []);
-    } else { data = []; }
-  }
-  if(!data.length) return;
-
-  function compute(it){
-    const from = Number(it.from); const to = Number(it.to);
-    const change = Number.isFinite(it.change_pp) ? Number(it.change_pp) : (to - from);
-    const trend = it.trend ? String(it.trend) : (change > 0 ? 'expensive' : change < 0 ? 'cheaper' : 'no_change');
-    const sector = it.sector || 'General';
-    const id = 'item-' + (it.description||'').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/(^-|-$)/g,'');
-    return Object.assign({}, it, {from,to,change_pp:change, trend, sector, id});
-  }
-  const items = data.map(compute);
-  const sectors = Array.from(new Set(items.map(i=>i.sector))).sort();
-
-  const qs = new URLSearchParams(location.search);
-  const state = {
-    sector: qs.get('sector') || 'all',
-    trend: qs.get('trend') || 'all'
-  };
-  function writeState(){
-    const p = new URLSearchParams();
-    if(state.sector!=='all') p.set('sector', state.sector);
-    if(state.trend!=='all') p.set('trend', state.trend);
-    const u = new URL(location.href); u.search = p.toString(); history.replaceState(null,'',u);
-  }
-
-  // Default sort by impact (absolute change descending)
-  const defaultSort = (a,b)=> Math.abs(b.change_pp) - Math.abs(a.change_pp);
-
-  function el(tag, cls, text){ const n=document.createElement(tag); if(cls) n.className=cls; if(text!=null) n.textContent=text; return n; }
-  function row(it){
-    const li = el('li','dh-row'); li.id = it.id;
-    const name = el('span','dh-name', it.description);
-    const data = el('span','dh-data');
-    const cls = it.change_pp>0?'delta-up':it.change_pp<0?'delta-down':'delta-zero';
-    const label = it.change_pp === 0 ? 'No change' : Math.abs(it.change_pp) + '% ' + (it.change_pp>0?'higher':'lower');
-    data.innerHTML = '<span class="old">'+it.from+'%</span> &rarr; <span class="new">'+it.to+'%</span> ' +
-      '<span class="delta '+cls+'">'+label+'</span>';
-    li.append(name,data); return li;
-  }
-
-  function buildToolbar(){
-    const card = el('div','dh-toolbar-card');
-    const wrap = el('div','dh-toolbar');
-
-    // Combobox search (takes up most space)
-    const combo = el('div','combo');
-    const search = document.createElement('input'); search.type='search'; search.placeholder='Search & jump to item…';
-    const list = el('div','combo-list');
-    combo.append(search,list);
-    let hoverIndex = -1; let visible = [];
     function openList(){ list.classList.add('show'); }
     function closeList(){ list.classList.remove('show'); hoverIndex=-1; }
     function renderList(q){
@@ -1411,10 +1054,8 @@ document.addEventListener("DOMContentLoaded", () => {
       stat.innerHTML = '<div class="dh-stat-label">'+label+'</div><div class="dh-stat-value '+(trend||'')+'">'+value+'</div>';
       countStats.appendChild(stat);
     };
-    addStat('Total Items', list.length);
     addStat('Cheaper', cheaper.length, 'stat-positive');
     addStat('Expensive', expensive.length, 'stat-negative');
-    addStat('Average Change', (avgDelta>0?'+':'')+avgDelta.toFixed(1)+'%', avgDelta > 0 ? 'stat-negative' : 'stat-positive');
     countCard.append(countTitle, countStats);
     
     // Impact highlights card (only show if there are items)
@@ -1477,6 +1118,210 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // remove any legacy sections to avoid duplicates
     widget.querySelectorAll('details, section').forEach(n=>n.remove());
+  }
+
+  render();
+})();
+</script>
+
+<!-- </body> -->
+<!-- </html> -->
+<script>
+(function(){
+  const dataEl = document.getElementById('gst-data');
+  const root = document.getElementById('gst-root');
+  const widget = document.querySelector('.dh-gst-widget');
+  if(!dataEl || !root || !widget) return;
+  let items = [];
+  try { items = JSON.parse(dataEl.textContent || '[]'); } catch(e){ return; }
+  if(!Array.isArray(items)){
+    if(items && typeof items === 'object'){
+      items = Object.entries(items)
+        .flatMap(([sector, list]) => Array.isArray(list) ? list.map(it => Object.assign({ sector }, it)) : []);
+    } else { items = []; }
+  }
+  if(items.length === 0) return;
+
+  function compute(it){
+    const from = Number(it.from);
+    const to = Number(it.to);
+    const change = Number.isFinite(it.change_pp) ? Number(it.change_pp) : (to - from);
+    const trend = change > 0 ? 'expensive' : change < 0 ? 'cheaper' : 'no_change';
+    const sector = it.sector || 'General';
+    const id = 'item-' + (it.description||'').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/(^-|-$)/g,'');
+    return Object.assign({}, it, { from, to, change_pp: change, trend, sector, id });
+  }
+  const itemsComputed = items.map(compute);
+  const sectors = Array.from(new Set(itemsComputed.map(i=>i.sector))).sort();
+
+  const qs = new URLSearchParams(location.search);
+  const state = {
+    q: (qs.get('q') || '').trim(),
+    sector: (qs.get('sector') || 'all'),
+    trend: (qs.get('trend') || 'all')
+  };
+  function writeState(){
+    const p = new URLSearchParams();
+    if(state.q) p.set('q', state.q);
+    if(state.sector!=='all') p.set('sector', state.sector);
+    if(state.trend!=='all') p.set('trend', state.trend);
+    const u = new URL(location.href); u.search = p.toString(); history.replaceState(null,'',u);
+  }
+
+  const defaultSort = (a,b)=> Math.abs(b.change_pp) - Math.abs(a.change_pp);
+
+  function el(tag, cls, text){ const n=document.createElement(tag); if(cls) n.className=cls; if(text!=null) n.textContent=text; return n; }
+  function row(it){
+    const li = el('li','dh-row'); li.id = it.id;
+    const name = el('span','dh-name', it.description);
+    const data = el('span','dh-data');
+    const cls = it.change_pp>0?'delta-up':it.change_pp<0?'delta-down':'delta-zero';
+    const label = it.change_pp === 0 ? 'No change' : Math.abs(it.change_pp) + '% ' + (it.change_pp>0?'higher':'lower');
+    const fromCls = it.change_pp>0 ? 'new' : 'old';
+    const toCls = it.change_pp>0 ? 'old' : 'new';
+    data.innerHTML = '<span class="'+fromCls+'">'+it.from+'%</span> &rarr; <span class="'+toCls+'">'+it.to+'%</span> ' +
+      '<span class="delta '+cls+'" aria-label="'+label+'">'+label+'</span>';
+    li.append(name,data); return li;
+  }
+
+  function buildToolbar(){
+    const card = el('div','dh-toolbar-card');
+    const wrap = el('div','dh-toolbar');
+
+    // Search combobox with dynamic suggestions
+    const combo = el('div','combo');
+    const search = document.createElement('input');
+    search.type = 'search';
+    search.placeholder = 'Search items';
+    search.value = state.q;
+    const list = el('div','combo-list');
+    combo.append(search, list);
+
+    let hoverIndex = -1; let visible = [];
+    function openList(){ list.classList.add('show'); }
+    function closeList(){ list.classList.remove('show'); hoverIndex = -1; }
+    function setHover(i){ hoverIndex = i; Array.from(list.children).forEach((n,ix)=> n.classList.toggle('hover', ix===hoverIndex)); }
+    function select(i){
+      if(i<0||i>=visible.length) return;
+      const it = visible[i];
+      closeList();
+      search.value = it.description;
+      const target = document.getElementById(it.id);
+      if(target){
+        target.classList.add('flash');
+        target.scrollIntoView({behavior:'smooth', block:'center'});
+        setTimeout(()=>target.classList.remove('flash'),1500);
+      }
+    }
+    function renderList(q){
+      const qq = (q||'').toLowerCase();
+      visible = !qq ? [] : itemsComputed.filter(i=> (i.description||'').toLowerCase().includes(qq)).slice(0,20);
+      list.innerHTML = '';
+      visible.forEach((it,idx)=>{ const d = el('div','combo-item', it.description); d.onmouseenter=()=> setHover(idx); d.onclick=()=> select(idx); list.append(d); });
+      if(visible.length){ openList(); } else { closeList(); }
+    }
+    // Dropdown-only filtering; do not re-render page content
+    search.addEventListener('input', () => { renderList(search.value); });
+    search.addEventListener('keydown', (e)=>{ if(!list.classList.contains('show')) return; if(e.key==='ArrowDown'){ e.preventDefault(); setHover(Math.min(visible.length-1, hoverIndex+1)); } else if(e.key==='ArrowUp'){ e.preventDefault(); setHover(Math.max(0, hoverIndex-1)); } else if(e.key==='Enter'){ e.preventDefault(); select(hoverIndex===-1?0:hoverIndex); } else if(e.key==='Escape'){ closeList(); } });
+    document.addEventListener('click', (e)=>{ if(!combo.contains(e.target)) closeList(); });
+
+    // Trend filter buttons
+    const trendGroup = el('div', 'dh-toolbar-controls');
+    const trendLabel = el('label', 'dh-toolbar-label', 'Filter:');
+    const trendButtons = el('div', 'dh-button-group');
+    ['all','cheaper','expensive'].forEach(v=>{
+      const btn = el('button','chip'+(state.trend===v?' active':''), v === 'all' ? 'All' : v.charAt(0).toUpperCase()+v.slice(1));
+      btn.onclick=()=>{ state.trend=v; writeState(); render(); };
+      trendButtons.append(btn);
+    });
+    trendGroup.append(trendLabel, trendButtons);
+
+    // Category chips row
+    const chips = el('div','chip-row');
+    function renderChips(){
+      chips.innerHTML='';
+      const all = el('button','chip'+(state.sector==='all'?' active':''),'All Categories'); 
+      all.onclick=()=>{state.sector='all'; writeState(); render();}; 
+      chips.append(all);
+      sectors.forEach(s=>{ 
+        const b=el('button','chip'+(state.sector===s?' active':''),s); 
+        b.onclick=()=>{ state.sector=s; writeState(); render(); }; 
+        chips.append(b); 
+      });
+    }
+    renderChips();
+
+    // Assemble toolbar
+    wrap.append(combo, trendGroup);
+    card.append(wrap, chips);
+    return card;
+  }
+
+  function buildSummaryCards(list){
+    const cheaper = list.filter(i=>i.trend==='cheaper');
+    const expensive = list.filter(i=>i.trend==='expensive');
+    const biggestUp = [...expensive].sort((a,b)=> b.change_pp - a.change_pp)[0];
+    const biggestDown = [...cheaper].sort((a,b)=> Math.abs(b.change_pp) - Math.abs(a.change_pp))[0];
+    const avgDelta = list.length ? (list.reduce((s,i)=> s + i.change_pp, 0)/list.length) : 0;
+    
+    const wrapper = el('div', 'dh-summary-wrapper');
+    const countCard = el('div','dh-card dh-summary-card');
+    const countTitle = el('h3','dh-block-title','📊 Items Overview');
+    const countStats = el('div', 'dh-stats-grid');
+    const addStat = (label, value, trend) => {
+      const stat = el('div', 'dh-stat-item');
+      stat.innerHTML = '<div class="dh-stat-label">'+label+'</div><div class="dh-stat-value '+(trend||'')+'">'+value+'</div>';
+      countStats.appendChild(stat);
+    };
+    addStat('Cheaper', cheaper.length, 'stat-positive');
+    addStat('Expensive', expensive.length, 'stat-negative');
+    countCard.append(countTitle, countStats);
+    
+    if(biggestUp || biggestDown) {
+      const impactCard = el('div','dh-card dh-summary-card');
+      const impactTitle = el('h3','dh-block-title','🎯 Key Highlights');
+      const impactList = el('ul', 'dh-impact-list');
+      
+      if(biggestDown) {
+        const li = el('li', 'dh-impact-item');
+        li.innerHTML = '<span class="impact-icon positive">📉</span><div><strong>Biggest Reduction:</strong><br>'+biggestDown.description+' <span class="stat-positive">('+Math.abs(biggestDown.change_pp)+'% lower)</span></div>';
+        impactList.appendChild(li);
+      }
+      
+      if(biggestUp) {
+        const li = el('li', 'dh-impact-item');
+        li.innerHTML = '<span class="impact-icon negative">📈</span><div><strong>Biggest Increase:</strong><br>'+biggestUp.description+' <span class="stat-negative">('+Math.abs(biggestUp.change_pp)+'% higher)</span></div>';
+        impactList.appendChild(li);
+      }
+      
+      impactCard.append(impactTitle, impactList);
+      wrapper.append(countCard, impactCard);
+    } else {
+      wrapper.appendChild(countCard);
+    }
+    
+    return wrapper;
+  }
+
+  function render(){
+    root.innerHTML='';
+    const filteredAll = itemsComputed.filter(i=>
+      (state.trend==='all'||i.trend===state.trend) &&
+      (state.sector==='all'||i.sector===state.sector)
+    );
+    root.appendChild(buildSummaryCards(filteredAll));
+    const toolbar = buildToolbar();
+    root.appendChild(toolbar);
+
+    const bySector = filteredAll.reduce((a,it)=>{ (a[it.sector]||(a[it.sector]=[])).push(it); return a; }, {});
+    Object.keys(bySector).sort().forEach(sector=>{
+      const list = bySector[sector].slice().sort(defaultSort);
+      const card = el('div','dh-card');
+      const h = el('h3','dh-block-title', sector);
+      const ul = el('ul','dh-list'); list.forEach(it=> ul.appendChild(row(it)));
+      card.append(h,ul);
+      root.appendChild(card);
+    });
   }
 
   render();
