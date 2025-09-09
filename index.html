@@ -1008,7 +1008,7 @@ details[open] summary::after{transform:rotate(180deg);}
     const trendButtons = el('div', 'dh-button-group');
     ['all','cheaper','expensive'].forEach(v=>{
       const btn = el('button','chip'+(state.trend===v?' active':''), v === 'all' ? 'All' : v.charAt(0).toUpperCase()+v.slice(1));
-      btn.onclick=()=>{ state.trend=v; writeState(); render(); };
+      btn.onclick=()=>{ state.trend=v; state.sector='all'; writeState(); render(); };
       trendButtons.append(btn);
     });
     trendGroup.append(trendLabel, trendButtons);
@@ -1231,7 +1231,7 @@ details[open] summary::after{transform:rotate(180deg);}
     const trendButtons = el('div', 'dh-button-group');
     ['all','cheaper','expensive'].forEach(v=>{
       const btn = el('button','chip'+(state.trend===v?' active':''), v === 'all' ? 'All' : v.charAt(0).toUpperCase()+v.slice(1));
-      btn.onclick=()=>{ state.trend=v; writeState(); render(); };
+      btn.onclick=()=>{ state.trend=v; state.sector='all'; writeState(); render(); };
       trendButtons.append(btn);
     });
     trendGroup.append(trendLabel, trendButtons);
